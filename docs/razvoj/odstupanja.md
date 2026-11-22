@@ -49,3 +49,7 @@ README je prvotno navodio Node 20+, što obuhvaća i izdanja koja zaključane ve
 
 Upute sada opisuju kada su dostupna druga tumačenja i usporedba solvera, te razlikuju obvezna pravila od informativne provjere korištenja svih kamiona. Za vremensku predprovjeru vrijedi donja granica iz odobrene specifikacije v4.2.
 
+## Jedna instanca javnog demoa
+
+Zadatak 18 u trećem je koraku još spominjao dvije instance. Izričita uputa vlasnika i četvrti korak određuju jednu. Konfiguracija i plan usklađeni su na `max_instances: 1`. Svi zahtjevi idu na istu imenovanu instancu, a nakon 15 minuta neaktivnosti kontejner se uspavljuje. [Konfiguracija i provjera objave](../deploy.md)
+

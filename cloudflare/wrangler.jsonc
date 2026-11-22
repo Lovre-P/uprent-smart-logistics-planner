@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "uprent-smart-logistics-planner",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-22",
+  "workers_dev": true,
+  "containers": [{
+    "class_name": "PlannerContainer",
+    "scheduling_policy": "default",
+    "image": "../Dockerfile",
+    "image_build_context": "..",
+    "instance_type": "basic",
+    "max_instances": 1
+  }],
+  "durable_objects": {
+    "bindings": [{ "name": "PLANNER", "class_name": "PlannerContainer" }]
+  },
+  "exports": {
+    "PlannerContainer": { "type": "durable-object", "storage": "sqlite" }
+  }
+}

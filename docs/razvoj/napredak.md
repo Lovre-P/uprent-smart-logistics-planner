@@ -19,6 +19,7 @@
 | 22. 11. 2026. | 14 | Plan po kamionu, neovisne provjere i usporedba solvera uz odbacivanje zastarjelih odgovora. | 223 Python + 46 web | `90d717d` |
 | 22. 11. 2026. | 15 | Karta s 10 lokacija, vremenska crta, 14 raspodjela i svih šest kartica na 390 i 1280 px. | 223 Python + 66 web | `af278a3` |
 | 22. 11. 2026. | 16 | Produkcijska izgradnja u Gitu, šest testova s pravim API-jem te zeleni Python i web CI. | 223 Python + 66 web + 6 E2E | `b3597ae` |
+| 22. 11. 2026. | 17 | Upute provjerene pokretanjem svih navedenih naredbi, uključujući portove 8000 i 8010. Priložena je snimka iz stvarne aplikacije. | 223 Python + 67 web + 6 E2E | `4c3a2ef` |
 
 Naknadni pregled zadatka 13 otkrio je da je uređivač prihvaćao nevaljano trajanje na nalogu, pogrešan tip postavke u JSON-u i zadržavao nacrt nakon vraćanja zadanih vrijednosti. Ispravci su u commitu `38cbb0d`, uz 113 prolaznih Python testova i 32 testa sučelja.
 

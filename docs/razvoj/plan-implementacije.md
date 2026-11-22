@@ -303,12 +303,12 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Datoteke:** kreiraj `docs/LOGIKA.md`, `docs/PRETPOSTAVKE.md`, `docs/AI_ALATI.md`, `docs/VRIJEME.md`; provjeri `README.md` i `docs/upute.md` (već napisani).
 
-- [ ] **Korak 1:** `LOGIKA.md` (do 2 stranice): problem (VRPPD), model, egzaktni solver i zašto je dokaz, OR-Tools i kada, validator i zašto je neovisan, cilj i leksikografski redoslijed.
-- [ ] **Korak 2:** `PRETPOSTAVKE.md`: tablica iz spec §6 (tumačenja, zadano i zašto, učinak u brojkama).
-- [ ] **Korak 3:** `AI_ALATI.md`: alati i uloge (ChatGPT, Gemini, Claude, Codex); kako je provjereno (egzaktni solver, neovisni referentni solver u `qa/oracle/`, validator, testovi); konkretne greške: tvrdo pravilo „oba kamiona" u OR-Toolsu → nije našao rješenje; `AddDisjunction([p, d], …)` → pad procesa; pogrešno zadano „9 h samo vožnja" u prvoj ChatGPT specifikaciji označeno kao dogovoreno prije nego što je kandidat odlučio. Geminijev neovisni pregled specifikacije našao je šest stvarnih problema (npr. `makespan` u OR-Toolsu mjerio je samo vožnju); svi su ispravljeni prije implementacije (spec §19).
-- [ ] **Korak 4:** `VRIJEME.md`: tablica faza s praznim stupcem sati koji popunjava kandidat (ne izmišljati brojke).
-- [ ] **Korak 5:** pokreni doslovno svaku naredbu iz `README.md` i `docs/upute.md`; svaka mora raditi kako piše. Razlike ispravi u dokumentu ili kodu.
-- [ ] **Korak 6:** commit `docs: submission documents`.
+- [x] **Korak 1:** `LOGIKA.md` (do 2 stranice): problem (VRPPD), model, egzaktni solver i zašto je dokaz, OR-Tools i kada, validator i zašto je neovisan, cilj i leksikografski redoslijed.
+- [x] **Korak 2:** `PRETPOSTAVKE.md`: tablica iz spec §6 (tumačenja, zadano i zašto, učinak u brojkama).
+- [x] **Korak 3:** `AI_ALATI.md`: alati i uloge (ChatGPT, Gemini, Claude, Codex); kako je provjereno (egzaktni solver, neovisni referentni solver u `qa/oracle/`, validator, testovi); konkretne greške: tvrdo pravilo „oba kamiona" u OR-Toolsu → nije našao rješenje; `AddDisjunction([p, d], …)` → pad procesa; pogrešno zadano „9 h samo vožnja" u prvoj ChatGPT specifikaciji označeno kao dogovoreno prije nego što je kandidat odlučio. Geminijev neovisni pregled specifikacije našao je šest stvarnih problema (npr. `makespan` u OR-Toolsu mjerio je samo vožnju); svi su ispravljeni prije implementacije (spec §19).
+- [x] **Korak 4:** `VRIJEME.md`: tablica faza s praznim stupcem sati koji popunjava kandidat (ne izmišljati brojke).
+- [x] **Korak 5:** pokreni doslovno svaku naredbu iz `README.md` i `docs/upute.md`; svaka mora raditi kako piše. Razlike ispravi u dokumentu ili kodu.
+- [x] **Korak 6:** commit `docs: submission documents`.
 
 ### Zadatak 18: Docker i Cloudflare
 
@@ -316,7 +316,7 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 - [ ] **Korak 1:** `Dockerfile`: `python:3.11-slim`, instaliraj `uv`, `uv sync --frozen --no-dev`, kopiraj `src/`, `data/`, `web/dist/`; `CMD ["uv","run","uprent","serve","--host","0.0.0.0","--port","8000"]`. `.dockerignore` isključuje `.git`, `.venv`, `web/node_modules`, `priprema/`, `originalni-zadatak.md` i `qa/`.
 - [ ] **Korak 2:** `docker build -t uprent-planner .` → uspjeh; `docker run --rm -p 8000:8000 uprent-planner`; `curl http://localhost:8000/api/health` → `{"status":"ok"}`; u pregledniku zadani plan 182,2 km.
-- [ ] **Korak 3:** Cloudflare Containers: `wrangler.jsonc` s `containers` (`class_name: "PlannerContainer"`, `image: "../Dockerfile"`, `max_instances: 2`) i Durable Object vezom; `src/index.ts` s klasom `PlannerContainer extends Container` (`defaultPort = 8000`, `sleepAfter = "15m"`) koja sve zahtjeve prosljeđuje kontejneru (paket `@cloudflare/containers`). Prije pisanja provjeri trenutnu dokumentaciju Cloudflare Containers (beta).
+- [ ] **Korak 3:** Cloudflare Containers: `wrangler.jsonc` s `containers` (`class_name: "PlannerContainer"`, `image: "../Dockerfile"`, `max_instances: 1`) i Durable Object vezom; `src/index.ts` s klasom `PlannerContainer extends Container` (`defaultPort = 8000`, `sleepAfter = "15m"`) koja sve zahtjeve prosljeđuje kontejneru (paket `@cloudflare/containers`). Prije pisanja provjeri trenutnu dokumentaciju Cloudflare Containers (beta).
 - [ ] **Korak 4:** kandidat je prije pokretanja Codexa uzeo Workers Paid i prijavio se (`npx wrangler login`). Codex:
   - pokreće `npx wrangler whoami` (ako ne prolazi, stani i javi);
   - provjerava da Docker radi;

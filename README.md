@@ -2,7 +2,7 @@
 
 Web-aplikacija koja transportne naloge raspoređuje na kamione, određuje redoslijed utovara i istovara te traži raspored s najmanje prijeđenih kilometara. Pritom poštuje nosivost i broj strojeva u svakom trenutku, dnevni limit vozača i povratak u bazu. Za podatke iz zadatka plan je **dokazano optimalan**.
 
-**Javni demo:** _(adresa nakon objave – vidi `docs/deploy.md`)_
+**[Otvori javni demo](https://uprent-smart-logistics-planner.lovre-petrina2.workers.dev/)** · Nakon 15 minuta neaktivnosti prvo otvaranje može potrajati dok se kontejner pokrene.
 
 ## Brzi početak
 

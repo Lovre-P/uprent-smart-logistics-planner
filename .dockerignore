@@ -1,0 +1,17 @@
+# U kontekst ulaze samo datoteke koje Dockerfile kopira.
+**
+!pyproject.toml
+!uv.lock
+!.python-version
+!src/
+!src/**
+!data/
+!data/default_scenario.json
+!web/
+!web/dist/
+!web/dist/**
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.env.*
+**/.dev.vars*
