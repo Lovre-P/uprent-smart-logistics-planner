@@ -46,7 +46,7 @@ function record(value: unknown): Record<string, unknown> {
 }
 function onlyFields(obj: Record<string, unknown>, allowed: string[]) {
   const extra = Object.keys(obj).find(key => !allowed.includes(key))
-  if (extra) fail(extra, 'Nepoznato polje: ' + extra + '.')
+  if (extra !== undefined) fail(extra, extra ? 'Nepoznato polje: ' + extra + '.' : 'Nepoznato polje s praznim nazivom.')
 }
 export function validateSetting(key: keyof Settings, value: unknown): void {
   const min = (strict = false) => {
@@ -69,7 +69,7 @@ export function validateSetting(key: keyof Settings, value: unknown): void {
       if (value !== 'km' && value !== 'makespan') fail(key, 'Nepoznat cilj optimizacije.')
       break
     case 'solver':
-      if (!['auto','exact','ortools'].includes(String(value))) fail(key, 'Nepoznat solver.')
+      if (value !== 'auto' && value !== 'exact' && value !== 'ortools') fail(key, 'Nepoznat solver.')
       break
     case 'pinned_orders':
       if (value != null && Object.values(record(value)).some(truck => typeof truck !== 'string')) fail(key, 'Provjerite oznake prikvačenih naloga i kamiona.')

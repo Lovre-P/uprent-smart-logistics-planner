@@ -163,7 +163,7 @@ Algoritam (DP nad stanjima, jer ga signatura ne određuje):
 
 **Sučelja:** `solve_exact(scenario: Scenario, order_ids: list[str] | None = None, ctx: ExactContext | None = None) -> SolverOutput`; `feasible_entry(scenario, truck, subset, entry) -> bool`; `full_plan_assignments(scenario, ctx) -> list[Assignment]` (za krivulju i `makespan`), `Assignment(by_truck: dict[str, frozenset[str]], km_tenths: int, end_seconds: Fraction)`.
 
-- [ ] **Korak 1: Testovi** (svi na zadanom scenariju, `apply_overrides` za postavke):
+- [x] **Korak 1: Testovi** (svi na zadanom scenariju, `apply_overrides` za postavke):
   - `test_default_literal`: 182,2 km, 10/10, A prazan, `optimality == "proven"`.
   - `test_handling_counts`: `limit_includes_handling=True` → 200,1, A = {N03}.
   - `test_require_all_trucks`: → 200,1.
@@ -182,7 +182,7 @@ Algoritam (DP nad stanjima, jer ga signatura ne određuje):
   - `test_single_slot`: oba kamiona `slots=1` → 209,0; uz `limit_includes_handling=True` → 226,0.
   - `test_zero_orders`: prazan popis naloga → 0 km, `status == "OPTIMAL"`.
   - `test_slots_only_truck_a` (Geminijev slučaj): flota samo A, četiri stroja od 800 kg, nalozi L1→L3 → 4/4 izvršeno; validator: A nikad više od 2 stroja.
-- [ ] **Korak 2:** → FAIL. **Korak 3:** implementiraj DP po podskupovima (spec §9.1), provjeru vremena po kamionu, leksikografski ključ i `makespan` u tri DP koraka iz spec §9.1 (bez nabrajanja raspodjela); `pinned_orders` se primjenjuje u kombiniranju (kamion ne smije uzeti nalog prikvačen na drugi kamion; prikvačeni nalog nije obvezan ako ne stane); kod `makespan` uz `require_all_trucks` ključevi su (−korišteni kamioni, M) i (−korišteni kamioni, km). **Korak 4:** → PASS. **Korak 5:** commit `feat: exact solver combination`.
+- [x] **Korak 2:** → FAIL. **Korak 3:** implementiraj DP po podskupovima (spec §9.1), provjeru vremena po kamionu, leksikografski ključ i `makespan` u tri DP koraka iz spec §9.1 (bez nabrajanja raspodjela); `pinned_orders` se primjenjuje u kombiniranju (kamion ne smije uzeti nalog prikvačen na drugi kamion; prikvačeni nalog nije obvezan ako ne stane); kod `makespan` uz `require_all_trucks` ključevi su (−korišteni kamioni, M) i (−korišteni kamioni, km). **Korak 4:** → PASS. **Korak 5:** commit `feat: exact solver combination`.
 
 ### Zadatak 7: OR-Tools solver
 

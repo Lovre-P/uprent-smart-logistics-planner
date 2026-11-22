@@ -93,6 +93,7 @@ export function InputTables({scenario, onChange, onReset, focusOrder}: Props) {
         const v = fields[col.key].trim()
         if (col.optional && !v) continue
         row[col.key] = col.type === 'number' ? parseHrNumber(v) : v
+        if (row[col.key] === null) throw new InputError(col.key, 'Unesite broj za polje ' + col.title + '.')
       }
       const s = structuredClone(scenario)
       if (index !== null) applyRename(s,group,s[group][index].id,fields.id.trim())

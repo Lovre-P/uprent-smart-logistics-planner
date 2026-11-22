@@ -6,10 +6,10 @@ import data from '../../../../data/default_scenario.json'
 import type { Scenario } from '../../types'
 import { InputTables } from './InputTables'
 
-function setup() {
+function setup(initial: Scenario = structuredClone(data) as Scenario) {
   const changed = vi.fn()
   function Editor() {
-    const [scenario, set] = useState<Scenario>(structuredClone(data) as Scenario)
+    const [scenario, set] = useState<Scenario>(initial)
     return <InputTables scenario={scenario} onChange={s => { changed(s); set(s) }} />
   }
   render(<Editor />)
@@ -58,4 +58,40 @@ it('uvoz neispravnog JSON-a ostavlja valjane tablice', async () => {
   expect((await screen.findByRole('alert')).textContent).toMatch(/nepoznata lokacija/i)
   expect(within(screen.getByRole('table', {name:'Transportni nalozi'})).getByText('N01')).toBeTruthy()
   expect(changed).not.toHaveBeenCalled()
+})
+
+it.each([
+  ['load_min', 'Utovar (min)'], ['unload_min', 'Istovar (min)'],
+] as const)('razlikuje neispravno i prazno trajanje za %s', async (key, label) => {
+  const initial = structuredClone(data) as Scenario
+  initial.orders[0][key] = 23
+  const changed = setup(initial)
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', { name: 'Uredi N01' }))
+  const input = screen.getByLabelText(label) as HTMLInputElement
+  expect(input.value).toBe('23')
+  fireEvent.change(input, {target: {value: 'abc'}})
+  await user.click(screen.getByRole('button', { name: 'Spremi nalog' }))
+  expect(changed).not.toHaveBeenCalled()
+  expect(input.value).toBe('abc')
+  expect(input.getAttribute('aria-invalid')).toBe('true')
+  expect(screen.getByRole('alert').textContent).toMatch(/broj/i)
+  fireEvent.change(input, {target: {value: ''}})
+  await user.click(screen.getByRole('button', { name: 'Spremi nalog' }))
+  expect(changed).toHaveBeenCalledOnce()
+  expect((changed.mock.calls[0][0] as Scenario).orders[0][key]).toBeUndefined()
+})
+
+it.each([
+  [{solver: ['auto']}, /solver/i],
+  [{'': 1}, /nepoznato polje/i],
+] as const)('uvoz odbija neispravnu postavku %j i čuva scenarij', async (patch, message) => {
+  const changed = setup()
+  const raw = {...data, settings: {...data.settings, ...patch}}
+  const file = new File([JSON.stringify(raw)], 'test.json', {type:'application/json'})
+  await userEvent.upload(screen.getByLabelText('Uvezi JSON'), file)
+  const alert = await screen.findByRole('alert')
+  expect(alert.textContent).toMatch(message)
+  expect(changed).not.toHaveBeenCalled()
+  expect(within(screen.getByRole('table', {name: 'Transportni nalozi'})).getByText('N01')).toBeTruthy()
 })
