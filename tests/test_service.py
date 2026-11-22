@@ -90,6 +90,18 @@ def test_zero_served_status(scenario_data):
     assert r.status == "OPTIMAL_PARTIAL" and "Nijedan nalog nije moguće izvršiti." in r.messages
 
 
+def test_heuristic_zero_does_not_claim_impossibility(rounding_scenario, monkeypatch):
+    s = apply_overrides(rounding_scenario, {"allow_partial": True})
+    assert service.solve(s).totals.served == 2
+    monkeypatch.setattr(service, "solve_ortools", lambda *args: SolverOutput(
+        Plan(routes={}), frozenset(), "best_found", "ortools", "FEASIBLE_PARTIAL",
+    ))
+    r = service.solve(s, "ortools")
+    assert r.totals.served == 0 and r.status == "FEASIBLE_PARTIAL"
+    assert "Nijedan nalog nije moguće izvršiti." not in r.messages
+    assert any("nije našao rutu" in msg and "nije dokazana" in msg for msg in r.messages)
+
+
 def test_unused_truck_not_invalid(scenario, monkeypatch):
     fake_exact(monkeypatch, {"B": B_ALONE})
     r = service.solve(apply_overrides(scenario, {"require_all_trucks": True}))
@@ -123,6 +135,7 @@ def test_ortools_partial_and_not_found_distinguished(rounding_scenario):
     full = service.solve(s, "ortools")
     assert full.status == "NOT_FOUND" and full.optimality == "none"
     assert all(u.reason == "NOT_FOUND" for u in full.unserved)
+    assert full.analysis.binding and full.analysis.curve == []
     partial = service.solve(apply_overrides(s, {"allow_partial": True}), "ortools")
     assert partial.status == "FEASIBLE_PARTIAL" and partial.totals.served == 1
     assert partial.unserved[0].reason == "NOT_FOUND"
@@ -133,6 +146,45 @@ def test_zero_orders(scenario_data):
     r = service.solve(Scenario.model_validate(scenario_data))
     assert r.status == "OPTIMAL" and r.totals.served == r.totals.orders == 0
     assert "Nijedan nalog nije moguće izvršiti." not in r.messages
+
+
+def test_zero_orders_ortools_records_requested_solver(scenario_data):
+    scenario_data["orders"] = []
+    r = service.solve(Scenario.model_validate(scenario_data), "ortools")
+    assert (r.status, r.solver, r.optimality) == ("FEASIBLE", "ortools", "best_found")
+    assert r.validation.passed and r.totals.served == r.totals.orders == 0
+
+
+def test_fractional_handling_heuristic_does_not_prove_impossibility(rounding_scenario):
+    data = rounding_scenario.model_dump()
+    for place in data["locations"]:
+        place.update(x=0, y=0)
+    data["settings"].update(load_min=0.001, unload_min=0.001, day_limit_min=0.01,
+                            limit_includes_handling=True, allow_partial=True, ortools_time_limit_s=1)
+    s = Scenario.model_validate(data)
+    assert service.solve(s).totals.served == 2
+    r = service.solve(s, "ortools")
+    assert (r.status, r.optimality, r.totals.served) == ("FEASIBLE_PARTIAL", "best_found", 0)
+    assert "Nijedan nalog nije moguće izvršiti." not in r.messages
+    assert all(u.reason == "NOT_FOUND" for u in r.unserved)
+
+
+def test_precheck_proof_without_full_tables_skips_exact_analysis(rounding_scenario):
+    s = apply_overrides(rounding_scenario, {"day_limit_min": 1, "allow_partial": True})
+    r = service.solve(s, "ortools")
+    assert r.status == "OPTIMAL_PARTIAL" and r.totals.served == 0
+    assert r.analysis.alternatives == [] and r.analysis.curve == [] and r.analysis.binding
+    assert any("predprovjer" in msg.lower() for msg in r.messages)
+
+
+def test_precheck_proof_survives_state_guard(scenario, monkeypatch):
+    s = apply_overrides(scenario, {"day_limit_min": 1})
+    monkeypatch.setattr(service, "MAX_STATES", 10)
+    r = service.solve(s)
+    assert (r.status, r.optimality, r.totals.served) == ("OPTIMAL_PARTIAL", "proven", 0)
+    assert {u.reason for u in r.unserved} == {"TOO_LONG_ALONE"}
+    assert any("predprovjer" in msg.lower() for msg in r.messages)
+    assert r.analysis.curve == [] and r.analysis.binding
 
 
 def test_revalidates_mutated_input(scenario):
