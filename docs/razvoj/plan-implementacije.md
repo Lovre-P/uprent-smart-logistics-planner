@@ -260,9 +260,9 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Sučelja:** `formatKm(km: number): string`, `formatKg(kg: number): string`, `formatDuration(min: number): string`, `parseHrNumber(s: string): number | null`; `hints.settings[key] = {title, body}` za svaki ključ postavki, `hints.tabs[tab]`, `hints.status[status]`, `hints.firstSteps: string[3]`, `hints.empty[...]`; `<Hint id>` = ikona ⓘ s oblačićem (otvara klik ili fokus, zatvara Esc ili klik izvan; nikad modal).
 
-- [ ] **Korak 1:** `npm create vite@latest web -- --template react-ts`; dodaj `tailwindcss`, `lucide-react`, `vitest`, `@testing-library/react`, `@testing-library/user-event`, `jsdom`, `@playwright/test`.
-- [ ] **Korak 2: Testovi:** `formatKm(182.2) === "182,2 km"`; `formatKg(9400) === "9.400 kg"`; `formatDuration(582.2) === "9 h 42 min"`, `formatDuration(522.9) === "8 h 43 min"`, `formatDuration(37.2) === "37 min"`, `formatDuration(540) === "9 h"`; `parseHrNumber("20,5") === 20.5`, `("20.5") === 20.5`, `("abc") === null`, `("") === null`; `hints covers every setting` (za svaki ključ iz `SETTINGS_KEYS` postoji naslov i tijelo; tekst za `limit_includes_handling` sadrži „voziti", „182,2 km" i „200,1 km"); `Hint opens and closes` (skriven → klik → vidljiv → Esc → skriven).
-- [ ] **Korak 3:** `npm test` → FAIL. **Korak 4:** implementiraj; tekstove uputa prepiši iz spec §6 i §13. **Korak 5:** `npm test` → PASS. **Korak 6:** commit `feat(web): scaffold, formatting and hint system`.
+- [x] **Korak 1:** `npm create vite@latest web -- --template react-ts`; dodaj `tailwindcss`, `lucide-react`, `vitest`, `@testing-library/react`, `@testing-library/user-event`, `jsdom`, `@playwright/test`.
+- [x] **Korak 2: Testovi:** `formatKm(182.2) === "182,2 km"`; `formatKg(9400) === "9.400 kg"`; `formatDuration(582.2) === "9 h 42 min"`, `formatDuration(522.9) === "8 h 43 min"`, `formatDuration(37.2) === "37 min"`, `formatDuration(540) === "9 h"`; `parseHrNumber("20,5") === 20.5`, `("20.5") === 20.5`, `("abc") === null`, `("") === null`; `hints covers every setting` (za svaki ključ iz `SETTINGS_KEYS` postoji naslov i tijelo; tekst za `limit_includes_handling` sadrži „voziti", „182,2 km" i „200,1 km"); `Hint opens and closes` (skriven → klik → vidljiv → Esc → skriven).
+- [x] **Korak 3:** `npm test` → FAIL. **Korak 4:** implementiraj; tekstove uputa prepiši iz spec §6 i §13. **Korak 5:** `npm test` → PASS. **Korak 6:** commit `feat(web): scaffold, formatting and hint system`.
 
 ### Zadatak 13: Sučelje – Postavke i Ulazni podaci
 

@@ -6,5 +6,6 @@
 | 22. 11. 2026. | 1 | Domenski modeli, provjera ulaza i zeleni GitHub Actions. | 36 | `8b842bf` |
 | 22. 11. 2026. | 2 | Matrični izračun udaljenosti, zaokruživanje i točno vrijeme vožnje. | 40 | `a97a975` |
 | 22. 11. 2026. | 3 | Neovisni validator. Nakon pregleda ispravljen je prikaz malih razlika vremena i udaljenosti. | 62 Python + 17 web | `bd8b276` |
+| 22. 11. 2026. | 12 | Sučelje, JSON klijent, hrvatsko formatiranje i pristupačne upute. | 62 Python + 17 web | `be63287` |
 
 Vlasnik je 22. 11. odobrio specifikaciju v4.2. Predprovjera koristi donju granicu od 11,2 km za N01 u regresijskom primjeru, a potpuni plan ima 11,3 km. [Odluka i primjer](odstupanja.md).
