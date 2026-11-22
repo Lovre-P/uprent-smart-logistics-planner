@@ -128,7 +128,7 @@ Fiksne rute (`tests/fixtures/routes.py`; `P:` = PICKUP, `D:` = DELIVERY):
 
 **Sučelja:** `Reason(order: str, code: Literal["TOO_HEAVY","TOO_LONG_ALONE","DOES_NOT_FIT_TOGETHER","NOT_FOUND"], message: str)`; `precheck(scenario: Scenario) -> dict[str, Reason]` (samo prva dva koda); `eligible_trucks(scenario: Scenario, order_id: str) -> list[str]`; `min_route_tenths(scenario: Scenario, order_id: str) -> int` vraća donju granicu iz spec §11: sp(baza, utovar) + sp(utovar, istovar) + sp(istovar, baza), gdje su sp najkraći putovi (Floyd–Warshall) u grafu zaokruženih dionica između baze i svih lokacija utovara i istovara. `TOO_LONG_ALONE` se dodjeljuje samo kad ta granica, pretvorena u vrijeme (uz radnje ako ulaze u limit), prelazi limit na svakom dopuštenom kamionu.
 
-- [ ] **Korak 1: Testovi:**
+- [x] **Korak 1: Testovi:**
   - `test_too_heavy`: dodan M11 12000 kg i N11 L1→L3 → `TOO_HEAVY`, poruka == „N11 nije moguće izvršiti: stroj M11 teži 12.000 kg, a najveća nosivost kamiona je 10.000 kg."
   - `test_too_long_alone_drive`: `day_limit_min=60` → N06 ima `TOO_LONG_ALONE` (60,2 min vožnje), N09 nema (34,5).
   - `test_too_long_alone_with_handling`: `limit_includes_handling=True`, `day_limit_min=90` → N06 `TOO_LONG_ALONE` (100,2 min).
@@ -136,7 +136,7 @@ Fiksne rute (`tests/fixtures/routes.py`; `P:` = PICKUP, `D:` = DELIVERY):
   - `test_too_long_alone_pinned`: A brzine 30 km/h, `day_limit_min=60`, `pinned_orders={"N04": "A"}` → N04 `TOO_LONG_ALONE` (76,8 min vožnje na A), iako bi na B stao (38,4 min).
   - `test_min_route_task_data`: `min_route_tenths` za N06, N09 i N04 iznosi 602, 345 i 384.
   - `test_rounding_shortcut_not_excluded` (scenarij iz spec §15, test 27): `min_route_tenths(N01) == 112`; N01 nije u rezultatu predprovjere, iako mu je samostalna ruta 11,4 km.
-- [ ] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat: order precheck`.
+- [x] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat: order precheck`.
 
 ### Zadatak 5: Egzaktni solver – tablice po kamionu
 
