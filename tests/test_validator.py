@@ -142,6 +142,15 @@ def test_plan_rejects_malformed_action():
 
 def test_time_limit_compared_before_display_rounding(scenario):
     s = apply_overrides(scenario, {"day_limit_min": 37.1999})
-    assert not rule(validate(s, Plan(routes={"A": STRICT_A})), "vrijeme").passed
+    check = rule(validate(s, Plan(routes={"A": STRICT_A})), "vrijeme")
+    assert not check.passed
+    assert "37,2 min" in check.detail and "37,1999 min" in check.detail
     s = apply_overrides(scenario, {"day_limit_min": 37.2})
     assert validate(s, Plan(routes={"A": STRICT_A})).passed
+
+
+def test_reported_km_difference_visible_below_display_precision(scenario):
+    plan = Plan(routes={"A": STRICT_A}, reported_km={"A": 37.19})
+    check = rule(validate(scenario, plan), "km_dosljedno")
+    assert not check.passed
+    assert "37,19 km" in check.detail and "37,2 km" in check.detail
