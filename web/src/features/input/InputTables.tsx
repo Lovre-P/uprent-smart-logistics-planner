@@ -83,7 +83,16 @@ export function InputTables({scenario, onChange, onReset, focusOrder}: Props) {
     setNotice(null)
     setDraft(null)
   }
-  function start(group:Group,index:number|null) { setNotice(null); setDraft(makeDraft(group,index,scenario)) }
+  function start(group: Group, index: number | null) {
+    const next = makeDraft(group, index, scenario)
+    if (group === 'orders' && index === null && !next.fields.machine) {
+      setDraft(null)
+      setNotice({ group, message: hints.empty.availableMachines })
+      return
+    }
+    setNotice(null)
+    setDraft(next)
+  }
   function save() {
     if (!draft) return
     try {

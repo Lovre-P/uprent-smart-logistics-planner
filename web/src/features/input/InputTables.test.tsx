@@ -30,6 +30,10 @@ it('nepoznata lokacija daje grešku uz polje i zadržava zadnji valjani scenarij
 it('dodaje M11 od 12.000 kg i nalog N11', async () => {
   const changed = setup()
   const user = userEvent.setup()
+  await user.click(screen.getByRole('button', {name:'Dodaj nalog'}))
+  expect(screen.getByRole('alert').textContent).toContain('U tablici Strojevi odaberite „Dodaj stroj”')
+  expect(screen.queryByRole('button', {name:'Spremi nalog'})).toBeNull()
+  expect(changed).not.toHaveBeenCalled()
   await user.click(screen.getByRole('button', {name:'Dodaj stroj'}))
   fireEvent.change(screen.getByLabelText('Masa (kg)'), {target:{value:'12000'}})
   await user.click(screen.getByRole('button', {name:'Spremi stroj'}))

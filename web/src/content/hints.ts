@@ -42,6 +42,7 @@ export const hints = {
     'Plan se računa sam. Pregledajte Kartu i Analizu.',
   ] as const,
   empty: {
+    availableMachines: 'Nema slobodnog stroja za novi nalog. U tablici Strojevi odaberite „Dodaj stroj”, spremite stroj pa dodajte nalog.',
     orders: 'Nema naloga. Dodajte nalog ili vratite podatke iz zadatka.',
     curve: 'Krivulja prikazuje potpune planove. Nema dostupnog potpunog plana.',
   },
