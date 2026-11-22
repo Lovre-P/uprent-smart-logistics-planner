@@ -220,7 +220,7 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Sučelja:** `analyze(scenario: Scenario, ctx: ExactContext | None, report: ValidationReport) -> Analysis`; `Analysis(why: list[WhyRow], unused_trucks: list[UnusedTruck], alternatives: list[Alternative], binding: list[str], sensitivity: Sensitivity, curve: list[CurvePoint])`; `WhyRow(order, truck, other_truck, other_km: float | None, delta_km: float | None, delta_objective: float | None, other_truck_orders: list[str], impossible: str | None, lazy: bool)` (`lazy=True` kad se redak računa tek na klik: 3 kamiona ili egzaktni solver duži od 2 s); `Alternative(setting: str, value: bool, km: float, served: int, trucks_used: int, summary: str)`; `CurvePoint(km: float, end_min: float, by_truck: dict[str, list[str]])`; `Sensitivity(limit_basis: Literal["drive","drive+handling"], limit_lower_min: float, better_plan_at_min: float | None, better_plan_km: float | None, handling_max_min: float | None, next_plan_km: float | None, note: str)`. Granice limita računaju se iz tablica prema `limit_basis`, nikad s krivulje (spec §12). Uz OR-Tools (`ctx is None`) `why`, `alternatives` i `curve` su prazni i `binding` sadrži napomenu da su dostupni samo uz egzaktni solver.
 
-- [ ] **Korak 1: Testovi:**
+- [x] **Korak 1: Testovi:**
   - `test_why_default`: N03 → A 200,1 (+17,9); N01 → 217,0 (+34,8); N04 → 217,0 (+34,8; `other_truck_orders == ["N01", "N04"]`); N05 → 220,1 (+37,9); N02 → 231,5 (+49,3); N06–N10 `impossible` sadrži „3.500 kg".
   - `test_unused_truck_sentence`: A → „Kamion A nije korišten: B stigne sve sam, a svaki nalog prebačen na A dodao bi najmanje 17,9 km."
   - `test_alternatives_default`: dva retka (`limit_includes_handling=True` → 200,1; `require_all_trucks=True` → 200,1).
@@ -234,7 +234,7 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
   - `test_analysis_requires_exact_result`: `analyze` s `ctx=None` → `why`, `alternatives` i `curve` su prazni.
   - `test_handling_max_no_used_trucks`: `limit_includes_handling=True`, bez naloga → `handling_max_min is None`, a `note` sadrži „nije primjenjivo".
   - `test_curve_default`: 14 točaka; prva (182,2; 582,2), zadnja (284,2; 344,8); uz `require_all_trucks=True` 13 točaka, prva (200,1; 522,9).
-- [ ] **Korak 2–5:** FAIL → implementacija (ponovno kombiniranje iz `ctx`, bez nove DP pretrage) → PASS → commit `feat: analysis`.
+- [x] **Korak 2–5:** FAIL → implementacija (ponovno kombiniranje iz `ctx`, bez nove DP pretrage) → PASS → commit `feat: analysis`.
 
 ### Zadatak 10: Usporedba scenarija i CLI
 
