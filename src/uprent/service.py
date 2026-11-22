@@ -80,7 +80,8 @@ def _reasons(s: Scenario, rejected: dict[str, Reason], output: SolverOutput,
     return result
 
 
-def solve(scenario: Scenario, solver_override: str | None = None, *, detailed: bool = False) -> SolveResult:
+def solve(scenario: Scenario, solver_override: str | None = None, *, detailed: bool = False,
+          include_analysis: bool = True) -> SolveResult:
     start = perf_counter()
     s = apply_overrides(scenario, {"solver": solver_override} if solver_override is not None else {})
     rejected = precheck(s)
@@ -123,8 +124,9 @@ def solve(scenario: Scenario, solver_override: str | None = None, *, detailed: b
                               if output.solver == "exact" else "OR-Tools nije pronašao raspored koji koristi sve kamione.")
                 messages.append(f"Nekorišteni kamioni: {', '.join(unused)}. {conclusion}")
             ctx = output.info.get("context") if output.solver == "exact" else None
-            analyzed = analyze(s, ctx, report, elapsed_s=output.info.get("elapsed_s", after_solver - before_solver),
-                               detailed=detailed)
+            if include_analysis:
+                analyzed = analyze(s, ctx, report, elapsed_s=output.info.get("elapsed_s", after_solver - before_solver),
+                                   detailed=detailed)
     end = perf_counter()
     return SolveResult(
         status=status, optimality=optimality, solver=output.solver, settings=s.settings, trucks=trucks,

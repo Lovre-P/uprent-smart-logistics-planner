@@ -37,3 +37,9 @@ Implementacija nastavlja od zadatka 1.
 
 U verziji 9.15.6755 poziv `SetAllowedVehiclesForIndex([0], index)` s Pythonovom listom javlja `TypeError` pri pretvorbi u `absl::Span< int const >`. Za utovar i istovar prikvačenog naloga koristi se `VehicleVar(index).SetValues([-1, v])`. Vrijednost `v` označava dopušteni kamion, a −1 izostavljeni nalog. U modelu s dva kamiona provjereno je da postavka za kamion 0 dopušta vrijednosti −1 i 0, a odbija 1.
 
+## Analiza većih flota i usporedba tumačenja
+
+Za izračun krivulje i gornje granice limita vrijede zaštite od milijun razmotrenih mogućnosti i osam sekundi. Broj potpunih raspodjela može biti velik i kada je solver brzo dokazao osnovni plan. Nakon prekida aplikacija prikazuje taj plan te navodi koje dijelove analize nije uspjela dovršiti.
+
+Ugrađenih šest usporedbi koristi iste ulazne podatke i dnevni limit. Kao osnovu uzimaju doslovno tumačenje vremena, korištenja kamiona i cilja iz zadatka. Vlastite varijante zadane u API pozivu mijenjaju odabrana polja trenutačnog scenarija.
+

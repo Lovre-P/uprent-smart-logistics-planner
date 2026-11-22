@@ -1,7 +1,7 @@
 import pytest
 
 from uprent.compare import PRESETS, Preset, compare
-from uprent.domain import Scenario, ScenarioError, load_scenario
+from uprent.domain import Scenario, ScenarioError, apply_overrides, load_scenario
 
 from conftest import DEFAULT_PATH
 
@@ -31,6 +31,12 @@ def test_custom_comparison_preserves_input(scenario):
     assert compare(scenario, [custom])[0].km == 209.0
     assert scenario.model_dump() == before
     assert compare(scenario, []) == []
+
+
+def test_builtin_readings_have_a_literal_baseline(scenario):
+    current = apply_overrides(scenario, {"limit_includes_handling": True})
+    assert compare(current)[0].km == 182.2
+    assert compare(current, [Preset(label="Trenutačne postavke", overrides={})])[0].km == 200.1
 
 
 def test_no_full_plan_has_no_validity_labels(scenario_data):
