@@ -1,0 +1,27 @@
+# Osobna priprema za razgovor – ne ide u predaju
+priprema/
+
+# Tekst zadatka – nije potvrđeno smije li se objaviti
+originalni-zadatak.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.hypothesis/
+*.egg-info/
+
+# Node (web/dist se namjerno commita da ocjenjivaču ne treba Node)
+web/node_modules/
+web/test-results/
+web/playwright-report/
+
+# Cloudflare / alati
+.wrangler/
+cloudflare/node_modules/
+.env
+.dev.vars
+
+# QA privremene datoteke
+qa/out/
