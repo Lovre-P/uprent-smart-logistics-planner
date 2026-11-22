@@ -1,0 +1,924 @@
+{
+  "status": "OPTIMAL",
+  "optimality": "proven",
+  "solver": "exact",
+  "settings": {
+    "day_limit_min": 540.0,
+    "limit_includes_handling": true,
+    "load_min": 20.0,
+    "unload_min": 20.0,
+    "require_all_trucks": false,
+    "allow_partial": true,
+    "objective": "km",
+    "solver": "auto",
+    "ortools_time_limit_s": 3.0,
+    "compare_with_ortools": true,
+    "day_start": "07:00",
+    "exact_max_orders": 12,
+    "exact_max_trucks": 3,
+    "pinned_orders": null
+  },
+  "totals": {
+    "km": 200.1,
+    "served": 10,
+    "orders": 10,
+    "trucks_used": 2
+  },
+  "trucks": [
+    {
+      "id": "A",
+      "name": "Kamion A",
+      "used": true,
+      "km": 37.2,
+      "drive_min": 37.2,
+      "handling_min": 40.0,
+      "total_min": 77.2,
+      "limit_min": 540.0,
+      "limit_basis": "drive+handling",
+      "slack_min": 462.8,
+      "peak_kg": 1800,
+      "capacity_kg": 3500,
+      "peak_slots": 1,
+      "slots": 2,
+      "orders": [
+        "N03"
+      ],
+      "steps": [
+        {
+          "seq": 1,
+          "location": "L9",
+          "action": "PICKUP",
+          "order": "N03",
+          "machine": "M03",
+          "leg_km": 9.4,
+          "cum_km": 9.4,
+          "arrive": "07:09",
+          "depart": "07:29",
+          "load_kg": 1800,
+          "load_slots": 1,
+          "onboard": [
+            "M03"
+          ]
+        },
+        {
+          "seq": 2,
+          "location": "L4",
+          "action": "DELIVERY",
+          "order": "N03",
+          "machine": "M03",
+          "leg_km": 17.0,
+          "cum_km": 26.4,
+          "arrive": "07:46",
+          "depart": "08:06",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        },
+        {
+          "seq": 3,
+          "location": "L0",
+          "action": "RETURN",
+          "order": null,
+          "machine": null,
+          "leg_km": 10.8,
+          "cum_km": 37.2,
+          "arrive": "08:17",
+          "depart": "08:17",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Kamion B",
+      "used": true,
+      "km": 162.9,
+      "drive_min": 162.9,
+      "handling_min": 360.0,
+      "total_min": 522.9,
+      "limit_min": 540.0,
+      "limit_basis": "drive+handling",
+      "slack_min": 17.1,
+      "peak_kg": 9900,
+      "capacity_kg": 10000,
+      "peak_slots": 3,
+      "slots": 3,
+      "orders": [
+        "N05",
+        "N07",
+        "N01",
+        "N02",
+        "N06",
+        "N10",
+        "N08",
+        "N09",
+        "N04"
+      ],
+      "steps": [
+        {
+          "seq": 1,
+          "location": "L0",
+          "action": "PICKUP",
+          "order": "N05",
+          "machine": "M05",
+          "leg_km": 0.0,
+          "cum_km": 0.0,
+          "arrive": "07:00",
+          "depart": "07:20",
+          "load_kg": 3100,
+          "load_slots": 1,
+          "onboard": [
+            "M05"
+          ]
+        },
+        {
+          "seq": 2,
+          "location": "L1",
+          "action": "PICKUP",
+          "order": "N01",
+          "machine": "M01",
+          "leg_km": 8.5,
+          "cum_km": 8.5,
+          "arrive": "07:28",
+          "depart": "07:48",
+          "load_kg": 3900,
+          "load_slots": 2,
+          "onboard": [
+            "M01",
+            "M05"
+          ]
+        },
+        {
+          "seq": 3,
+          "location": "L2",
+          "action": "PICKUP",
+          "order": "N02",
+          "machine": "M02",
+          "leg_km": 7.6,
+          "cum_km": 16.1,
+          "arrive": "07:56",
+          "depart": "08:16",
+          "load_kg": 5200,
+          "load_slots": 3,
+          "onboard": [
+            "M01",
+            "M02",
+            "M05"
+          ]
+        },
+        {
+          "seq": 4,
+          "location": "L8",
+          "action": "DELIVERY",
+          "order": "N05",
+          "machine": "M05",
+          "leg_km": 13.6,
+          "cum_km": 29.7,
+          "arrive": "08:29",
+          "depart": "08:49",
+          "load_kg": 2100,
+          "load_slots": 2,
+          "onboard": [
+            "M01",
+            "M02"
+          ]
+        },
+        {
+          "seq": 5,
+          "location": "L8",
+          "action": "PICKUP",
+          "order": "N07",
+          "machine": "M07",
+          "leg_km": 0.0,
+          "cum_km": 29.7,
+          "arrive": "08:49",
+          "depart": "09:09",
+          "load_kg": 6900,
+          "load_slots": 3,
+          "onboard": [
+            "M01",
+            "M02",
+            "M07"
+          ]
+        },
+        {
+          "seq": 6,
+          "location": "L2",
+          "action": "DELIVERY",
+          "order": "N07",
+          "machine": "M07",
+          "leg_km": 13.6,
+          "cum_km": 43.3,
+          "arrive": "09:23",
+          "depart": "09:43",
+          "load_kg": 2100,
+          "load_slots": 2,
+          "onboard": [
+            "M01",
+            "M02"
+          ]
+        },
+        {
+          "seq": 7,
+          "location": "L3",
+          "action": "DELIVERY",
+          "order": "N01",
+          "machine": "M01",
+          "leg_km": 7.3,
+          "cum_km": 50.6,
+          "arrive": "09:50",
+          "depart": "10:10",
+          "load_kg": 1300,
+          "load_slots": 1,
+          "onboard": [
+            "M02"
+          ]
+        },
+        {
+          "seq": 8,
+          "location": "L5",
+          "action": "PICKUP",
+          "order": "N06",
+          "machine": "M06",
+          "leg_km": 10.8,
+          "cum_km": 61.4,
+          "arrive": "10:21",
+          "depart": "10:41",
+          "load_kg": 5200,
+          "load_slots": 2,
+          "onboard": [
+            "M02",
+            "M06"
+          ]
+        },
+        {
+          "seq": 9,
+          "location": "L5",
+          "action": "DELIVERY",
+          "order": "N02",
+          "machine": "M02",
+          "leg_km": 0.0,
+          "cum_km": 61.4,
+          "arrive": "10:41",
+          "depart": "11:01",
+          "load_kg": 3900,
+          "load_slots": 1,
+          "onboard": [
+            "M06"
+          ]
+        },
+        {
+          "seq": 10,
+          "location": "L7",
+          "action": "DELIVERY",
+          "order": "N06",
+          "machine": "M06",
+          "leg_km": 12.5,
+          "cum_km": 73.9,
+          "arrive": "11:13",
+          "depart": "11:33",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        },
+        {
+          "seq": 11,
+          "location": "L7",
+          "action": "PICKUP",
+          "order": "N10",
+          "machine": "M10",
+          "leg_km": 0.0,
+          "cum_km": 73.9,
+          "arrive": "11:33",
+          "depart": "11:53",
+          "load_kg": 9400,
+          "load_slots": 1,
+          "onboard": [
+            "M10"
+          ]
+        },
+        {
+          "seq": 12,
+          "location": "L3",
+          "action": "DELIVERY",
+          "order": "N10",
+          "machine": "M10",
+          "leg_km": 17.3,
+          "cum_km": 91.2,
+          "arrive": "12:11",
+          "depart": "12:31",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        },
+        {
+          "seq": 13,
+          "location": "L3",
+          "action": "PICKUP",
+          "order": "N04",
+          "machine": "M04",
+          "leg_km": 0.0,
+          "cum_km": 91.2,
+          "arrive": "12:31",
+          "depart": "12:51",
+          "load_kg": 2400,
+          "load_slots": 1,
+          "onboard": [
+            "M04"
+          ]
+        },
+        {
+          "seq": 14,
+          "location": "L4",
+          "action": "PICKUP",
+          "order": "N08",
+          "machine": "M08",
+          "leg_km": 17.0,
+          "cum_km": 108.2,
+          "arrive": "13:08",
+          "depart": "13:28",
+          "load_kg": 8500,
+          "load_slots": 2,
+          "onboard": [
+            "M04",
+            "M08"
+          ]
+        },
+        {
+          "seq": 15,
+          "location": "L9",
+          "action": "DELIVERY",
+          "order": "N08",
+          "machine": "M08",
+          "leg_km": 17.0,
+          "cum_km": 125.2,
+          "arrive": "13:45",
+          "depart": "14:05",
+          "load_kg": 2400,
+          "load_slots": 1,
+          "onboard": [
+            "M04"
+          ]
+        },
+        {
+          "seq": 16,
+          "location": "L6",
+          "action": "PICKUP",
+          "order": "N09",
+          "machine": "M09",
+          "leg_km": 18.0,
+          "cum_km": 143.2,
+          "arrive": "14:23",
+          "depart": "14:43",
+          "load_kg": 9900,
+          "load_slots": 2,
+          "onboard": [
+            "M04",
+            "M09"
+          ]
+        },
+        {
+          "seq": 17,
+          "location": "L1",
+          "action": "DELIVERY",
+          "order": "N09",
+          "machine": "M09",
+          "leg_km": 11.2,
+          "cum_km": 154.4,
+          "arrive": "14:54",
+          "depart": "15:14",
+          "load_kg": 2400,
+          "load_slots": 1,
+          "onboard": [
+            "M04"
+          ]
+        },
+        {
+          "seq": 18,
+          "location": "L0",
+          "action": "DELIVERY",
+          "order": "N04",
+          "machine": "M04",
+          "leg_km": 8.5,
+          "cum_km": 162.9,
+          "arrive": "15:22",
+          "depart": "15:42",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        },
+        {
+          "seq": 19,
+          "location": "L0",
+          "action": "RETURN",
+          "order": null,
+          "machine": null,
+          "leg_km": 0.0,
+          "cum_km": 162.9,
+          "arrive": "15:42",
+          "depart": "15:42",
+          "load_kg": 0,
+          "load_slots": 0,
+          "onboard": []
+        }
+      ]
+    }
+  ],
+  "unserved": [],
+  "validation": {
+    "passed": true,
+    "checks": [
+      {
+        "rule": "baza",
+        "passed": true,
+        "detail": "Svi kamioni završavaju prazni u bazi L0.",
+        "severity": "hard"
+      },
+      {
+        "rule": "kapacitet_kg",
+        "passed": true,
+        "detail": "A: 1.800 / 3.500 kg; B: 9.900 / 10.000 kg",
+        "severity": "hard"
+      },
+      {
+        "rule": "mjesta",
+        "passed": true,
+        "detail": "A: 1 / 2; B: 3 / 3",
+        "severity": "hard"
+      },
+      {
+        "rule": "redoslijed",
+        "passed": true,
+        "detail": "Svaki istovar slijedi odgovarajući utovar.",
+        "severity": "hard"
+      },
+      {
+        "rule": "isti_kamion",
+        "passed": true,
+        "detail": "Isti kamion izvršava obje radnje i poštuje prikvačene naloge.",
+        "severity": "hard"
+      },
+      {
+        "rule": "jednom",
+        "passed": true,
+        "detail": "Izvršenih naloga s jednim utovarom i jednim istovarom: 10.",
+        "severity": "hard"
+      },
+      {
+        "rule": "vrijeme",
+        "passed": true,
+        "detail": "A: 77,2 / 540 min; B: 522,9 / 540 min",
+        "severity": "hard"
+      },
+      {
+        "rule": "km_dosljedno",
+        "passed": true,
+        "detail": "Prijavljene udaljenosti odgovaraju prijeđenima.",
+        "severity": "hard"
+      },
+      {
+        "rule": "neizvrseni_dosljedno",
+        "passed": true,
+        "detail": "Popis se podudara (0 neizvršenih).",
+        "severity": "hard"
+      },
+      {
+        "rule": "svi_kamioni",
+        "passed": true,
+        "detail": "nije primjenjivo",
+        "severity": "info"
+      }
+    ]
+  },
+  "analysis": {
+    "why": [
+      {
+        "order": "N01",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": 217.0,
+        "delta_km": 16.9,
+        "delta_objective": 16.9,
+        "other_truck_orders": [
+          "N01",
+          "N04"
+        ],
+        "impossible": null,
+        "lazy": false
+      },
+      {
+        "order": "N02",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": 231.5,
+        "delta_km": 31.4,
+        "delta_objective": 31.4,
+        "other_truck_orders": [
+          "N01",
+          "N02"
+        ],
+        "impossible": null,
+        "lazy": false
+      },
+      {
+        "order": "N03",
+        "truck": "A",
+        "other_truck": "B",
+        "other_km": 217.0,
+        "delta_km": 16.9,
+        "delta_objective": 16.9,
+        "other_truck_orders": [
+          "N02",
+          "N03",
+          "N05",
+          "N06",
+          "N07",
+          "N08",
+          "N09",
+          "N10"
+        ],
+        "impossible": null,
+        "lazy": false
+      },
+      {
+        "order": "N04",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": 217.0,
+        "delta_km": 16.9,
+        "delta_objective": 16.9,
+        "other_truck_orders": [
+          "N01",
+          "N04"
+        ],
+        "impossible": null,
+        "lazy": false
+      },
+      {
+        "order": "N05",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": 220.1,
+        "delta_km": 20.0,
+        "delta_objective": 20.0,
+        "other_truck_orders": [
+          "N05"
+        ],
+        "impossible": null,
+        "lazy": false
+      },
+      {
+        "order": "N06",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": null,
+        "delta_km": null,
+        "delta_objective": null,
+        "other_truck_orders": [],
+        "impossible": "M06 (3.900 kg) teži je od nosivosti kamiona A (3.500 kg).",
+        "lazy": false
+      },
+      {
+        "order": "N07",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": null,
+        "delta_km": null,
+        "delta_objective": null,
+        "other_truck_orders": [],
+        "impossible": "M07 (4.800 kg) teži je od nosivosti kamiona A (3.500 kg).",
+        "lazy": false
+      },
+      {
+        "order": "N08",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": null,
+        "delta_km": null,
+        "delta_objective": null,
+        "other_truck_orders": [],
+        "impossible": "M08 (6.100 kg) teži je od nosivosti kamiona A (3.500 kg).",
+        "lazy": false
+      },
+      {
+        "order": "N09",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": null,
+        "delta_km": null,
+        "delta_objective": null,
+        "other_truck_orders": [],
+        "impossible": "M09 (7.500 kg) teži je od nosivosti kamiona A (3.500 kg).",
+        "lazy": false
+      },
+      {
+        "order": "N10",
+        "truck": "B",
+        "other_truck": "A",
+        "other_km": null,
+        "delta_km": null,
+        "delta_objective": null,
+        "other_truck_orders": [],
+        "impossible": "M10 (9.400 kg) teži je od nosivosti kamiona A (3.500 kg).",
+        "lazy": false
+      }
+    ],
+    "unused_trucks": [],
+    "alternatives": [
+      {
+        "setting": "limit_includes_handling",
+        "value": false,
+        "km": 182.2,
+        "served": 10,
+        "trucks_used": 1,
+        "summary": "B vozi N01, N02, N03, N04, N05, N06, N07, N08, N09, N10."
+      }
+    ],
+    "binding": [
+      "B koristi 522,9 od 540 min (rezerva 17,1 min) i nosi do 9.900 od 10.000 kg.",
+      "Uz limit od 582,2 min dostupan je bolji plan od 182,2 km."
+    ],
+    "sensitivity": {
+      "limit_basis": "drive+handling",
+      "limit_lower_min": 522.9,
+      "better_plan_at_min": 582.2,
+      "better_plan_km": 182.2,
+      "handling_max_min": 20.95,
+      "next_plan_km": 217.0,
+      "note": "Za sadašnji raspored treba najmanje 522,9 min dnevnog limita. Pri povećanju trajanja svake radnje sadašnji raspored stane u limit do 20,95 min po radnji. Na 21 min izvršava se 10/10 naloga uz 217 km."
+    },
+    "curve": [
+      {
+        "km": 200.1,
+        "end_min": 522.9,
+        "by_truck": {
+          "A": [
+            "N03"
+          ],
+          "B": [
+            "N01",
+            "N02",
+            "N04",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 217.0,
+        "end_min": 495.3,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N04"
+          ],
+          "B": [
+            "N02",
+            "N03",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 220.3,
+        "end_min": 485.1,
+        "by_truck": {
+          "A": [
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N01",
+            "N02",
+            "N03",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 225.5,
+        "end_min": 482.9,
+        "by_truck": {
+          "A": [
+            "N03",
+            "N04"
+          ],
+          "B": [
+            "N01",
+            "N02",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 228.7,
+        "end_min": 480.5,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N03"
+          ],
+          "B": [
+            "N02",
+            "N04",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 235.1,
+        "end_min": 451.1,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N02",
+            "N04"
+          ],
+          "B": [
+            "N03",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 235.3,
+        "end_min": 440.5,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N03",
+            "N04"
+          ],
+          "B": [
+            "N02",
+            "N05",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 239.4,
+        "end_min": 427.0,
+        "by_truck": {
+          "A": [
+            "N03",
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N01",
+            "N02",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 254.9,
+        "end_min": 392.7,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N02",
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N03",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 265.7,
+        "end_min": 386.8,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N03",
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N02",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 272.3,
+        "end_min": 386.1,
+        "by_truck": {
+          "A": [
+            "N02",
+            "N03",
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N01",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 281.0,
+        "end_min": 384.8,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N02",
+            "N03",
+            "N05"
+          ],
+          "B": [
+            "N04",
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      },
+      {
+        "km": 284.2,
+        "end_min": 344.8,
+        "by_truck": {
+          "A": [
+            "N01",
+            "N02",
+            "N03",
+            "N04",
+            "N05"
+          ],
+          "B": [
+            "N06",
+            "N07",
+            "N08",
+            "N09",
+            "N10"
+          ]
+        }
+      }
+    ]
+  },
+  "comparison": null,
+  "messages": [],
+  "timings_ms": {
+    "precheck": 0.7331000524573028,
+    "solver": 116.37609999161214,
+    "validation": 1.067899982444942,
+    "analysis": 41.33859998546541,
+    "total": 159.5157000119798
+  }
+}

@@ -251,8 +251,8 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Sučelja:** `create_app(static_dir: Path | None = Path("web/dist")) -> FastAPI`; rute iz spec §8. Ako `static_dir` ne postoji, `/` vraća jednostavnu stranicu „Sučelje nije izgrađeno – pokreni `npm run build` u mapi web". Rute za računanje su sinkrone (`def`), pa ih FastAPI izvršava u threadpoolu.
 
-- [ ] **Korak 1: Testovi** (`TestClient`): `test_health`; `test_default_scenario` (10 naloga); `test_solve_default` (182,2); `test_solve_invalid_422` (nepoznata lokacija → 422, `detail` sadrži „nepoznata lokacija"); `test_validate_bad_plan` (dvostruki utovar → `passed is False`); `test_compare` (6 redaka); `test_solve_runs_in_threadpool` (ruta je `def`, ne `async def` – provjeri `inspect.iscoroutinefunction` nad endpointom); `test_static_fallback` (bez `web/dist` → 200 i tekst „nije izgrađeno").
-- [ ] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat: FastAPI app`.
+- [x] **Korak 1: Testovi** (`TestClient`): `test_health`; `test_default_scenario` (10 naloga); `test_solve_default` (182,2); `test_solve_invalid_422` (nepoznata lokacija → 422, `detail` sadrži „nepoznata lokacija"); `test_validate_bad_plan` (dvostruki utovar → `passed is False`); `test_compare` (6 redaka); `test_solve_runs_in_threadpool` (ruta je `def`, ne `async def` – provjeri `inspect.iscoroutinefunction` nad endpointom); `test_static_fallback` (bez `web/dist` → 200 i tekst „nije izgrađeno").
+- [x] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat: FastAPI app`.
 
 ### Zadatak 12: Sučelje – kostur, API klijent, formatiranje i sustav uputa
 

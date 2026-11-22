@@ -26,7 +26,8 @@ async function request<T>(path: string, signal?: AbortSignal, payload?: unknown)
 export const api = {
   health: (signal?: AbortSignal) => request<{status: string}>('health', signal),
   defaultScenario: (signal?: AbortSignal) => request<Scenario>('scenario/default', signal),
-  solve: (scenario: Scenario, signal?: AbortSignal) => request<SolveResult>('solve', signal, { scenario }),
+  solve: (scenario: Scenario, signal?: AbortSignal, detailed = false) =>
+    request<SolveResult>('solve', signal, detailed ? { scenario, detailed: true } : { scenario }),
   validate: (scenario: Scenario, plan: Plan, signal?: AbortSignal) =>
     request<ValidationReport>('validate', signal, { scenario, plan }),
   compare: (scenario: Scenario, variants?: Preset[], signal?: AbortSignal) =>

@@ -1,0 +1,65 @@
+.plan-view,.validation-view { min-width:0; }
+.plan-view { display:grid; gap:.85rem; }
+.plan-view > .info-line { margin:.05rem 0 .15rem; }
+.plan-metrics { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:.65rem; }
+.plan-metrics > div { border:1px solid var(--line); border-radius:.5rem; background:var(--paper); padding:clamp(.9rem,1.6vw,1.4rem); }
+.plan-metrics span { display:flex; align-items:center; gap:.45rem; font-size:.82rem; font-weight:600; color:var(--muted); }
+.plan-metrics strong { display:block; margin-top:.4rem; font-size:clamp(1.5rem,2.8vw,2.6rem); white-space:nowrap; font-weight:650; letter-spacing:-.045em; line-height:1.15; }
+.plan-metrics .metric-primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+.metric-primary span { color:#d5e7de; }
+.alternative-strip { padding:.72rem .9rem; border:1px solid #bad1c0; border-radius:.42rem; background:#edf4ed; }
+.alternative-strip h3,.plan-warnings h3 { display:flex; align-items:center; gap:.4rem; margin:0 0 .2rem; font-size:.92rem; font-weight:700; }
+.alternative-row { display:flex; align-items:center; justify-content:space-between; gap:.8rem; font-size:.84rem; line-height:1.45; padding:.33rem 0; }
+.alternative-row+.alternative-row { border-top:1px solid #d4e2d6; }
+.alternative-metric { font-weight:700; white-space:nowrap; }
+.alternative-detail { color:#42584a; }
+.alternative-row button,.detail-button,.why-button { display:inline-flex; align-items:center; gap:.3rem; padding:.3rem .55rem; color:var(--brand); border:1px solid #a7c9b2; border-radius:.3rem; background:var(--paper); font-size:.8rem; font-weight:650; }
+.alternative-row button:disabled,.detail-button:disabled { opacity:.55; cursor:wait; }
+.detail-button { justify-self:start; }
+.truck-list { display:grid; gap:.8rem; min-width:0; }
+.truck-card { min-width:0; overflow:hidden; border:1px solid var(--line); border-radius:.5rem; background:var(--paper); }
+.truck-header { display:flex; align-items:center; gap:.65rem; padding:.85rem 1rem; }
+.truck-header h3 { margin:0; font-size:1.16rem; font-weight:680; }
+.truck-header .truck-km { margin-left:auto; color:var(--ink); font-weight:650; }
+.truck-symbol { display:inline-flex; align-items:center; justify-content:center; background:#f3f5ef; border-radius:.3rem; width:2rem; height:2rem; }
+.truck-card--idle .truck-header { padding:.55rem 1rem; }
+.truck-card--idle .truck-header > span:not(.truck-symbol) { color:var(--muted); font-size:.83rem; }
+.why-button { margin-left:auto; background:transparent; border:0; }
+.truck-explanation { padding:0 1rem .75rem; color:var(--muted); font-size:.88rem; }
+.truck-facts { display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; padding:0 1rem .8rem; }
+.truck-facts dt { font-size:.72rem; color:var(--muted); }
+.truck-facts dd { font-size:.85rem; font-weight:620; }
+.truck-route { padding:.45rem 1rem; background:#f6f7f2; color:var(--muted); font-size:.78rem; line-height:1.5; overflow-wrap:anywhere; }
+.truck-route strong { margin-right:.4rem; color:var(--ink); }
+.steps-scroll,.comparison-scroll { min-width:0; overflow:auto; max-width:100%; }
+.steps-table,.solver-comparison { width:100%; border-collapse:collapse; text-align:left; font-size:.79rem; }
+.steps-table thead,.solver-comparison thead { background:#edf0eb; font-size:.72rem; color:#45534b; }
+.steps-table th,.steps-table td,.solver-comparison th,.solver-comparison td { padding:.42rem .5rem; border-bottom:1px solid #e2e6de; white-space:nowrap; }
+.steps-table th,.solver-comparison th { font-weight:650; }
+.steps-table small { display:block; font-size:.67rem; color:var(--muted); }
+.steps-table meter { display:block; width:4.25rem; max-width:100%; height:.4rem; accent-color:#378668; }
+.step-action { font-weight:600; }.step-action--pickup {color:#246e5c;}.step-action--delivery {color:#85522e;}
+.plan-warnings { padding:.85rem 1rem; background:#fff4d8; border:1px solid #e5cc90; border-radius:.4rem; color:#5f4316; }
+.plan-warnings li { margin-top:.5rem; font-size:.85rem; }
+.plan-warnings button { display:inline-flex; align-items:center; gap:.1rem; border-bottom:1px solid currentColor; font-weight:700; }
+.plan-warnings code { margin-left:.5rem; font-size:.7rem; }
+.computing-line { display:flex; align-items:center; gap:.45rem; font-size:.85rem; color:var(--brand); }
+.computing-line svg { animation:solve-turn 1.4s linear infinite; } @keyframes solve-turn {to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce) { .computing-line svg {animation:none;} }
+.plan-message {color:var(--muted);font-size:.88rem;}
+.validation-list,.solver-panel { overflow:hidden; border:1px solid var(--line); border-radius:.5rem; background:var(--paper); }
+.validation-list li { display:flex; gap:.75rem; align-items:center; padding:.72rem .9rem; }
+.validation-list li+li { border-top:1px solid var(--line); }
+.validation-list li strong { font-size:.91rem; }
+.validation-list li p { font-size:.8rem; color:var(--muted); overflow-wrap:anywhere; }
+.check-symbol { flex:none; display:grid; place-items:center; height:1.65rem; width:1.65rem; border-radius:50%; background:#e2f2e3; color:#23603f; font-weight:700; }
+.validation-note .check-symbol { background:#fff0c8; color:#78510f; }.validation-fail .check-symbol { background:#ffe6e1; color:#913327; }
+.check-outcome { margin-left:auto; font-size:.76rem; white-space:nowrap; }.solver-panel {margin-top:.8rem; padding:1rem; }
+.solver-panel h3 { font-size:1.07rem; font-weight:700; }.solver-panel p { font-size:.85rem; color:var(--muted); margin:.45rem 0; }
+@media (max-width:640px) {
+  .plan-metrics {grid-template-columns:1fr 1fr;gap:.45rem;} .plan-metrics .metric-primary { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; }
+  .plan-metrics .metric-primary strong { margin:0; }.plan-metrics > div {padding:.7rem;}
+  .alternative-row {align-items:flex-start;}.alternative-detail {display:block;}
+  .truck-header,.truck-card--idle .truck-header {padding:.6rem .65rem;gap:.4rem;flex-wrap:wrap;}
+  .truck-facts {padding:0 .65rem .7rem;}.check-outcome {white-space:normal;}
+}

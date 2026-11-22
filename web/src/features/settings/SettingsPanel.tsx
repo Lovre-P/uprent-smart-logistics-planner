@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react'
+import { useId, useLayoutEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { ChevronDown, SlidersHorizontal } from 'lucide-react'
 import { Hint } from '../../components/Hint'
@@ -25,7 +25,7 @@ function NumberSetting({name, unit, settings, onChange}: Props & {name:NumericKe
   const value = String(settings[name]).replace('.', ',')
   const [draft, setDraft] = useState(value)
   const [error, setError] = useState('')
-  useEffect(() => { setDraft(value); setError('') }, [value])
+  useLayoutEffect(() => { setDraft(value); setError('') }, [value])
   function commit() {
     try {
       const number = parseHrNumber(draft)
