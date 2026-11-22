@@ -20,7 +20,12 @@
 | 22. 11. 2026. | 15 | Karta s 10 lokacija, vremenska crta, 14 raspodjela i svih šest kartica na 390 i 1280 px. | 223 Python + 66 web | `af278a3` |
 | 22. 11. 2026. | 16 | Produkcijska izgradnja u Gitu, šest testova s pravim API-jem te zeleni Python i web CI. | 223 Python + 66 web + 6 E2E | `b3597ae` |
 | 22. 11. 2026. | 17 | Upute provjerene pokretanjem svih navedenih naredbi, uključujući portove 8000 i 8010. Priložena je snimka iz stvarne aplikacije. | 223 Python + 67 web + 6 E2E | `4c3a2ef` |
+| 22. 11. 2026. | 18 | Cloudflare Containers objavljen i provjeren u ugrađenom pregledniku. Aktivna aplikacija ima ograničenje od jedne instance. | 223 Python + 67 web + 6 E2E | `b8412b9` |
 
 Naknadni pregled zadatka 13 otkrio je da je uređivač prihvaćao nevaljano trajanje na nalogu, pogrešan tip postavke u JSON-u i zadržavao nacrt nakon vraćanja zadanih vrijednosti. Ispravci su u commitu `38cbb0d`, uz 113 prolaznih Python testova i 32 testa sučelja.
 
 Vlasnik je 22. 11. odobrio specifikaciju v4.2. Predprovjera koristi donju granicu od 11,2 km za N01 u regresijskom primjeru, a potpuni plan ima 11,3 km. [Odluka i primjer](odstupanja.md).
+
+Završna provjera potvrdila je 223 Python testa, 67 testova sučelja i šest E2E testova. Nakon pregleda stvarne karte dodan je test čitljivosti oznake L7 i ispravak u commitu `40f7969`. Oba prolaza usporedbe s referentnim solverom na istih 30 scenarija završila su bez grešaka.
+
+Javni demo provjeren je 22. 11. 2026. Ugrađeni preglednik prikazao je odgovor `{"status":"ok"}` i zadani plan od 182,2 km s oznakom „Dokazano optimalno”. Cloudflare je potvrdio aktivnu aplikaciju, 1 GiB memorije i najviše jednu instancu. [Otvori planer](https://uprent-smart-logistics-planner.lovre-petrina2.workers.dev/)

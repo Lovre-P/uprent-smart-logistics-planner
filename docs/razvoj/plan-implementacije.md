@@ -314,10 +314,10 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Datoteke:** kreiraj `Dockerfile`, `.dockerignore`, `cloudflare/package.json`, `cloudflare/wrangler.jsonc`, `cloudflare/src/index.ts`, `docs/deploy.md`.
 
-- [ ] **Korak 1:** `Dockerfile`: `python:3.11-slim`, instaliraj `uv`, `uv sync --frozen --no-dev`, kopiraj `src/`, `data/`, `web/dist/`; `CMD ["uv","run","uprent","serve","--host","0.0.0.0","--port","8000"]`. `.dockerignore` isključuje `.git`, `.venv`, `web/node_modules`, `priprema/`, `originalni-zadatak.md` i `qa/`.
-- [ ] **Korak 2:** `docker build -t uprent-planner .` → uspjeh; `docker run --rm -p 8000:8000 uprent-planner`; `curl http://localhost:8000/api/health` → `{"status":"ok"}`; u pregledniku zadani plan 182,2 km.
-- [ ] **Korak 3:** Cloudflare Containers: `wrangler.jsonc` s `containers` (`class_name: "PlannerContainer"`, `image: "../Dockerfile"`, `max_instances: 1`) i Durable Object vezom; `src/index.ts` s klasom `PlannerContainer extends Container` (`defaultPort = 8000`, `sleepAfter = "15m"`) koja sve zahtjeve prosljeđuje kontejneru (paket `@cloudflare/containers`). Prije pisanja provjeri trenutnu dokumentaciju Cloudflare Containers (beta).
-- [ ] **Korak 4:** kandidat je prije pokretanja Codexa uzeo Workers Paid i prijavio se (`npx wrangler login`). Codex:
+- [x] **Korak 1:** `Dockerfile`: `python:3.11-slim`, instaliraj `uv`, `uv sync --frozen --no-dev`, kopiraj `src/`, `data/`, `web/dist/`; `CMD ["uv","run","uprent","serve","--host","0.0.0.0","--port","8000"]`. `.dockerignore` isključuje `.git`, `.venv`, `web/node_modules`, `priprema/`, `originalni-zadatak.md` i `qa/`.
+- [x] **Korak 2:** `docker build -t uprent-planner .` → uspjeh; `docker run --rm -p 8000:8000 uprent-planner`; `curl http://localhost:8000/api/health` → `{"status":"ok"}`; u pregledniku zadani plan 182,2 km.
+- [x] **Korak 3:** Cloudflare Containers: `wrangler.jsonc` s `containers` (`class_name: "PlannerContainer"`, `image: "../Dockerfile"`, `max_instances: 1`) i Durable Object vezom; `src/index.ts` s klasom `PlannerContainer extends Container` (`defaultPort = 8000`, `sleepAfter = "15m"`) koja sve zahtjeve prosljeđuje kontejneru (paket `@cloudflare/containers`). Prije pisanja provjeri trenutnu dokumentaciju Cloudflare Containers (beta).
+- [x] **Korak 4:** kandidat je prije pokretanja Codexa uzeo Workers Paid i prijavio se (`npx wrangler login`). Codex:
   - pokreće `npx wrangler whoami` (ako ne prolazi, stani i javi);
   - provjerava da Docker radi;
   - iz mape `cloudflare/` pokreće `npx wrangler deploy` (`max_instances: 1`), s varijablom okoline `CLOUDFLARE_ACCOUNT_ID` postavljenom iz lokalne datoteke `cloudflare/.env`. Datoteka je u `.gitignore`, a ID se ne upisuje u `wrangler.jsonc`;
@@ -325,8 +325,8 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
   - javni URL provjerava u ugrađenom pregledniku i upisuje ga u README.
 
   Provjera: `https://…/api/health` → ok; zadani plan 182,2 km.
-- [ ] **Korak 5:** `docs/deploy.md`: oba puta iz spec §14 (Containers i rezerva Pages + Render) s naredbama, uključujući postavljanje `CLOUDFLARE_ACCOUNT_ID` za korisnika koji ima više računa.
-- [ ] **Korak 6:** commit `chore: docker and cloudflare deploy`.
+- [x] **Korak 5:** `docs/deploy.md`: oba puta iz spec §14 (Containers i rezerva Pages + Render) s naredbama, uključujući postavljanje `CLOUDFLARE_ACCOUNT_ID` za korisnika koji ima više računa.
+- [x] **Korak 6:** commit `chore: docker and cloudflare deploy`.
 
 ---
 
