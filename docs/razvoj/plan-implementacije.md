@@ -270,8 +270,8 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Sučelja:** `useScenario()` → `{scenario, setScenario, applySettings(patch), resetToTask(), error}`; `SettingsPanel({settings, onChange})`; `InputTables({scenario, onChange})`. Neispravna izmjena se ne šalje na računanje: prikazuje grešku uz polje, a zadnji valjani scenarij i rezultat ostaju.
 
-- [ ] **Korak 1: Testovi:** `shows literal defaults` (limit „9 h", prekidač „U 9 h ulazi utovar/istovar" isključen, utovar 20, istovar 20, „Svaki kamion mora voziti" isključen); `toggle emits patch` (klik → `onChange({limit_includes_handling: true})`); `every setting has a hint icon`; `invalid edit keeps last result` (nalog s nepoznatom lokacijom → poruka uz polje, `onChange` nije pozvan); `decimal comma accepted` (utovar „20,5" → 20.5); `reset restores task data`; `add order with heavy machine` (dodaj M11 12000 i N11 L1→L3 → scenarij ima 11 naloga).
-- [ ] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat(web): settings and input data`.
+- [x] **Korak 1: Testovi:** `shows literal defaults` (limit „9 h", prekidač „U 9 h ulazi utovar/istovar" isključen, utovar 20, istovar 20, „Svaki kamion mora voziti" isključen); `toggle emits patch` (klik → `onChange({limit_includes_handling: true})`); `every setting has a hint icon`; `invalid edit keeps last result` (nalog s nepoznatom lokacijom → poruka uz polje, `onChange` nije pozvan); `decimal comma accepted` (utovar „20,5" → 20.5); `reset restores task data`; `add order with heavy machine` (dodaj M11 12000 i N11 L1→L3 → scenarij ima 11 naloga).
+- [x] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat(web): settings and input data`.
 
 ### Zadatak 14: Sučelje – Plan, Provjera i računanje
 

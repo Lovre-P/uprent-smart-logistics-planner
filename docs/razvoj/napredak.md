@@ -9,5 +9,6 @@
 | 22. 11. 2026. | 12 | Sučelje, JSON klijent, hrvatsko formatiranje i pristupačne upute. | 62 Python + 17 web | `be63287` |
 | 22. 11. 2026. | 4 | Predprovjera v4.2. Regresijski primjer potvrđuje granicu od 11,2 km. | 69 Python + 17 web | `9743ea3` |
 | 22. 11. 2026. | 5 | 65.562 stanja. Neovisno provjereno svih 1.056 ruta i kilometraža. | 80 Python + 17 web | `9aa29ff` |
+| 22. 11. 2026. | 13 | Postavke, uređivanje i uvoz podataka. Neispravna izmjena čuva zadnji valjani scenarij. | 80 Python + 26 web | `6aaedbb` |
 
 Vlasnik je 22. 11. odobrio specifikaciju v4.2. Predprovjera koristi donju granicu od 11,2 km za N01 u regresijskom primjeru, a potpuni plan ima 11,3 km. [Odluka i primjer](odstupanja.md).
