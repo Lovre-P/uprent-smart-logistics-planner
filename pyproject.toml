@@ -1,0 +1,16 @@
+[project]
+name = "uprent"
+version = "0.1.0"
+description = "Planiranje prijevoza radnih strojeva"
+requires-python = ">=3.11,<3.12"
+dependencies = ["fastapi", "uvicorn", "pydantic>=2,<3", "ortools>=9.15,<9.16"]
+
+[project.scripts]
+uprent = "uprent.cli:main"
+
+[dependency-groups]
+dev = ["pytest", "httpx", "hypothesis"]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.12"]
+build-backend = "uv_build"
