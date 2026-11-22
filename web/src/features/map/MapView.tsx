@@ -73,12 +73,13 @@ export function MapView({scenario, result}: {scenario: Scenario; result: SolveRe
   const selectedStep = selectedTruck?.steps.find(s => s.seq === selection?.seq) ?? selectedTruck?.steps[0]
   // A separate numbered badge for every visit, including actions at the same coordinates.
   const visits = new Map<string, number>()
+  const badgesAbove = (point: Point) => point.y > height - 70
   const locateBadge = (point: Point): Point => {
     const key = point.x + ',' + point.y
     const visit = visits.get(key) ?? 0
     visits.set(key, visit + 1)
     const side = point.x > width - 85 ? -1 : 1
-    const sign = point.y > height - 70 ? -1 : 1
+    const sign = badgesAbove(point) ? -1 : 1
     return {x:point.x + side * (10 + (visit % 4) * 17), y:point.y + sign * (10 + Math.floor(visit / 4) * 17)}
   }
   return <section className="route-map" aria-label="Karta ruta">
@@ -131,7 +132,7 @@ export function MapView({scenario, result}: {scenario: Scenario; result: SolveRe
               <title>{locations.map(l => l.name || l.id).join(' / ')} ({number.format(locations[0].x)}, {number.format(locations[0].y)})</title>
               {isDepot ? <rect x="-5" y="-5" width="10" height="10" rx="1" className="map-depot" />
                 : <circle r="4" className="map-location" />}
-              <text className="map-label" x={p.x > width - 80 ? -7 : 7} y="-7" textAnchor={p.x > width - 80 ? 'end' : 'start'}>
+              <text className="map-label" x={p.x > width - 80 ? -7 : 7} y={badgesAbove(p) ? 14 : -7} textAnchor={p.x > width - 80 ? 'end' : 'start'}>
                 {locations.map((l, i) => <tspan key={l.id} data-testid={'loc-' + l.id} data-x={p.x} data-y={p.y}>
                   {i > 0 ? ' / ' : ''}{l.id}
                 </tspan>)}{isDepot ? ' · Baza' : ''}

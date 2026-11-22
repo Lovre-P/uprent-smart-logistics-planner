@@ -51,3 +51,19 @@ it('označava podudarne lokacije zajedničkim natpisom umjesto dvaju preklopljen
   expect(screen.getByTestId('loc-L0').closest('text')?.textContent).toBe('L0 / L1 · Baza')
   expect(screen.getByTestId('loc-L0').closest('text')).toBe(screen.getByTestId('loc-L1').closest('text'))
 })
+
+it('smješta naziv L7 ispod koraka i ostavlja prostor iznad oznaka donje osi', () => {
+  render(<MapView scenario={scenario} result={standard} />)
+  const location = screen.getByTestId('loc-L7')
+  const pointY = Number(location.getAttribute('data-y'))
+  const labelY = pointY + Number(location.closest('text')!.getAttribute('y'))
+  const axisY = Number(screen.getByText('X (km)').getAttribute('y'))
+  const badges = screen.getAllByRole('button', {name:/· L7 ·/})
+  for (const badge of badges) {
+    const match = badge.getAttribute('transform')!.match(/translate\(\S+ (\S+)\)/)!
+    const radius = Number(badge.querySelector('circle')!.getAttribute('r'))
+    expect(Number(match[1]) + radius).toBeLessThan(pointY)
+  }
+  expect(labelY).toBeGreaterThan(pointY + 10)
+  expect(labelY + 12).toBeLessThan(axisY)
+})
