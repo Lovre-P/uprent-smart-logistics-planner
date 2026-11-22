@@ -190,7 +190,7 @@ Algoritam (DP nad stanjima, jer ga signatura ne određuje):
 
 **Sučelja:** `solve_ortools(scenario: Scenario, order_ids: list[str], time_limit_s: float) -> SolverOutput` (`optimality="best_found"`; status `FEASIBLE`, `FEASIBLE_PARTIAL` ili `NOT_FOUND`).
 
-- [ ] **Korak 1: Testovi** (svaki plan mora proći `validate`):
+- [x] **Korak 1: Testovi** (svaki plan mora proći `validate`):
   - `test_default_close_to_optimum`: zadano → 10 izvršenih, km između 182,2 i 185,8 (≤ 2 % iznad).
   - `test_strict_close_to_optimum`: `limit_includes_handling=True` → 10 izvršenih, km između 200,1 i 204,1.
   - `test_too_heavy_does_not_crash`: N11 12.000 kg → proces ne pada, N11 izostavljen, validator prolazi.
@@ -201,7 +201,7 @@ Algoritam (DP nad stanjima, jer ga signatura ne određuje):
   - `test_slow_truck_capacity`: A brzine 30 km/h, `objective="makespan"` → plan postoji i prolazi validator (W_max računat po najnižoj brzini).
   - `test_limit_capacity_floor`: `limit_capacity_seconds(60.01) == 3600` i `limit_capacity_seconds(540) == 32400`.
   - `test_no_forbidden_patterns`: izvor datoteke ne sadrži regex `AddDisjunction\(\[[^\]]*,[^\]]*\]` ni `NextVar\(.*Start.*\)\s*!=`.
-- [ ] **Korak 2–5:** FAIL → implementacija prema spec §9.2 (kazne, dimenzije `kg`, `slots`, `limit_time` i `work_time`, `ceil` sekundi, `SetAllowedVehiclesForIndex` za prikvačene naloge) → PASS → commit `feat: ortools solver`.
+- [x] **Korak 2–5:** FAIL → implementacija prema spec §9.2 (kazne, dimenzije `kg`, `slots`, `limit_time` i `work_time`, `ceil` sekundi, `SetAllowedVehiclesForIndex` za prikvačene naloge) → PASS → commit `feat: ortools solver`.
 
 ### Zadatak 8: Servis, auto izbor i SolveResult
 
