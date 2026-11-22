@@ -12,4 +12,6 @@
 | 22. 11. 2026. | 13 | Postavke, uređivanje i uvoz podataka. Neispravna izmjena čuva zadnji valjani scenarij. | 80 Python + 26 web | `6aaedbb` |
 | 22. 11. 2026. | 6 | Kombiniranje ruta i tri prolaza za najraniji završetak. Neovisna provjera potvrdila je 192 usporedbe. | 113 Python + 26 web | `939c818` |
 
+Naknadni pregled zadatka 13 otkrio je da je uređivač prihvaćao nevaljano trajanje na nalogu, pogrešan tip postavke u JSON-u i zadržavao nacrt nakon vraćanja zadanih vrijednosti. Ispravci su u commitu `38cbb0d`, uz 113 prolaznih Python testova i 32 testa sučelja.
+
 Vlasnik je 22. 11. odobrio specifikaciju v4.2. Predprovjera koristi donju granicu od 11,2 km za N01 u regresijskom primjeru, a potpuni plan ima 11,3 km. [Odluka i primjer](odstupanja.md).

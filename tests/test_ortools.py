@@ -57,7 +57,15 @@ def test_makespan_counts_handling(scenario):
 
 def test_pinned_ortools(scenario):
     _, report = checked(apply_overrides(scenario, {"pinned_orders": {"N04": "A"}}))
-    assert "N04" in report.trucks[0].orders and len(report.served) == 10
+    assert set(report.trucks[0].orders) == {"N01", "N04"}
+    assert report.total_km == 217.0 and len(report.served) == 10
+
+
+def test_all_orders_pinned_ortools(scenario):
+    pins = {o.id: "A" if o.id == "N04" else "B" for o in scenario.orders}
+    _, report = checked(apply_overrides(scenario, {"pinned_orders": pins}))
+    assert report.trucks[0].orders == ["N04"]
+    assert report.total_km == 218.8 and len(report.served) == 10
 
 
 def test_slow_truck_capacity(scenario_data):
@@ -127,6 +135,22 @@ def test_empty_orders(scenario_data):
     scenario_data["orders"] = []
     out, report = checked(Scenario.model_validate(scenario_data), 0.1)
     assert out.status == "FEASIBLE" and not out.served and report.total_km == 0
+
+
+@pytest.mark.parametrize("order_ids", [[], ["N03"]])
+@pytest.mark.parametrize("allow_partial", [True, False])
+def test_status_considers_prefiltered_orders(scenario, order_ids, allow_partial):
+    s = apply_overrides(scenario, {"allow_partial": allow_partial})
+    out = solve_ortools(s, order_ids, 0.1)
+    report = validate(s, out.plan)
+    assert report.passed
+    if allow_partial:
+        assert out.status == "FEASIBLE_PARTIAL" and out.optimality == "best_found"
+        assert out.served == frozenset(order_ids)
+    else:
+        assert out.status == "NOT_FOUND" and out.optimality == "none"
+        assert not out.served and not any(t.used for t in report.trucks)
+    assert out.plan.reported_unserved == [o.id for o in s.orders if o.id not in out.served]
 
 
 def test_zero_time_pickups_precede_delivery(scenario_data):
