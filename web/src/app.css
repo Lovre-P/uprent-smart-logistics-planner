@@ -1,0 +1,58 @@
+body { min-width:0; }
+.planner-shell { min-height:100vh; background:#f4f5f0; }
+.planner-header { background:#183e38; color:white; border-bottom:1px solid #0e2e28; }
+.header-inner,.workspace { width:100%; max-width:96rem; margin:0 auto; padding-left:clamp(1rem,2.5vw,2.6rem);padding-right:clamp(1rem,2.5vw,2.6rem); }
+.header-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:4.55rem; }
+.product-name,.product-name h1,.header-tools,.header-status,.solve-button,.help-action,.drawer-trigger { display:flex;align-items:center; }
+.product-name { gap:.68rem; flex-shrink:0; }
+.product-mark { display:grid;place-items:center; width:2.65rem;height:2.65rem;background:#c5e884;color:#203a29;border-radius:.35rem; }
+.product-name h1 { gap:.8rem; line-height:1.12; }
+.product-name b {font-family:'Barlow Condensed','Bahnschrift SemiCondensed','Arial Narrow',sans-serif; font-weight:800;letter-spacing:-.045em;font-size:1.48rem;}
+.product-name h1 span {font-size:.91rem;font-weight:470;color:#d9e7dc;border-left:1px solid #648078;padding-left:.8rem;}
+.header-tools { justify-content:flex-end; gap:.85rem; }.header-status {gap:.4rem;} .header-status small {color:#dbe7dc;font-size:.7rem;}
+.solve-button,.drawer-trigger,.help-button {font-weight:650;font-size:.85rem;line-height:1.2;}
+.solve-button {gap:.5rem;border:1px solid #d4ed9c;padding:.62rem .9rem;border-radius:.3rem;color:#1a3224;background:#c5e884;white-space:nowrap;}
+.solve-button:hover:not(:disabled){background:#d8f6a0;}.solve-button:disabled{opacity:.65;cursor:wait;}
+.help-control { position:relative; }.help-button {width:2rem;height:2rem;border:1px solid #789188;color:#edf5ef;border-radius:50%;font-size:1rem;}
+.help-panel {position:absolute;right:0;top:calc(100% + .6rem);width:min(23rem,calc(100vw - 2rem));max-height:75vh;overflow:auto;z-index:45;background:white;color:var(--ink);border:1px solid var(--line);border-radius:.45rem;box-shadow:0 .45rem 1.45rem #18362c29;padding:.85rem;}
+.help-panel h2 {font-size:1.02rem;font-weight:680;}.help-panel li button {width:100%;text-align:left;padding:.4rem .3rem;border-bottom:1px solid #e1e6dc;}.help-panel li strong,.help-panel li span{display:block;}.help-panel li strong{font-size:.84rem;}.help-panel li span{font-size:.78rem;color:var(--muted);}
+.help-action {gap:.4rem;font-size:.8rem;font-weight:600;margin-top:.55rem;color:var(--brand);}
+.workspace {display:grid;grid-template-columns:minmax(13.7rem,16rem) minmax(0,1fr);gap:clamp(.85rem,1.7vw,1.8rem);padding-top:1.2rem;padding-bottom:3rem;align-items:start;}
+.workspace-main {min-width:0;}.settings-aside{position:sticky;top:.65rem;max-height:calc(100vh - 1.3rem);overflow:auto;scrollbar-width:thin;}
+.first-steps {display:flex;align-items:center;gap:.75rem;background:#e9eee3;border:1px solid #d2dccb;border-radius:.4rem;padding:.5rem .65rem;margin-bottom:.65rem;font-size:.75rem;line-height:1.4;}
+.first-steps strong {white-space:nowrap;font-size:.76rem;}.first-steps ol{display:flex;flex-wrap:wrap;gap:.22rem .8rem;flex:1;}.first-steps li{display:inline;}.first-steps li span {display:inline-grid;place-items:center;width:1.05rem;height:1.05rem;background:#d8e2cf;color:#304b35;border-radius:50%;font-weight:700;margin-right:.25rem;}.first-steps>button {flex:none;padding:.18rem;}
+.view-tabs {display:flex;gap:.15rem;align-items:stretch;border-bottom:1px solid #bdcbbf;overflow-x:auto;scrollbar-width:thin;}
+.view-tabs button {display:flex;align-items:center;gap:.35rem;white-space:nowrap;font-size:.83rem;font-weight:610;color:#526259;padding:.6rem .68rem;border-bottom:2px solid transparent;}
+.view-tabs button[aria-selected=true] {color:#124d3e;border-bottom-color:#24664c;background:#e6eee2;}
+.view-tabs button:hover {background:#edf1e9;}.view-tabs button:focus-visible{outline-offset:-3px;}
+.view-heading {display:flex;align-items:center;margin:1.05rem 0 .1rem;}
+.view-heading h2 {font-family:'Barlow','Bahnschrift','Segoe UI',sans-serif;font-size:clamp(1.55rem,2.45vw,2.3rem);font-weight:680;letter-spacing:-.04em;line-height:1.15;}
+.view-working {font-size:.83rem;color:var(--brand);margin:.6rem 0;}
+[role=tabpanel]:focus:not(:focus-visible) {outline:0;}
+.drawer-trigger {gap:.4rem;border:1px solid #b9c5b8;background:#fff;padding:.48rem .75rem;border-radius:.32rem;color:var(--brand);margin:0 0 .45rem;}
+.drawer-layer {position:fixed;inset:0;z-index:60;background:#15352e72;display:flex;align-items:stretch;}
+.settings-drawer {position:relative;width:min(20rem,calc(100vw - 2rem));overflow-y:auto;background:#fff;box-shadow:5px 0 20px #11251e26;}
+.settings-drawer .settings-panel {border:0;border-radius:0;}.drawer-close {position:absolute;right:.65rem;top:.68rem;display:grid;place-items:center;width:2rem;height:2rem;color:#36574b;}
+@media(max-width:1000px) and (min-width:801px) {
+  .workspace{grid-template-columns:13.5rem minmax(0,1fr);}.view-tabs button{padding:.55rem .4rem;font-size:.77rem;}.view-tabs button svg{display:none;}
+  .product-name h1{display:block;}.product-name h1 span{display:block;border:0;padding:0;font-size:.73rem;}
+}
+@media(max-width:800px) {
+  .workspace{display:block;padding-top:.75rem;}.header-inner{min-height:4rem;}
+  .product-name h1{display:block;}.product-name h1 span{display:block;border:0;padding:0;font-size:.71rem;}
+  .product-mark{width:2.15rem;height:2.15rem;}.product-name b{font-size:1.18rem;}
+  .header-tools{gap:.45rem;}.header-status small{display:none;}
+  .header-inner,.workspace{padding-left:.75rem;padding-right:.75rem;}
+  .view-heading{margin-top:.75rem;}.view-tabs button{font-size:.82rem;padding:.55rem .55rem;}
+  .first-steps {align-items:flex-start;gap:.5rem;}.first-steps ol {display:block;}.first-steps li{display:block;}
+}
+@media(max-width:590px) {
+  .header-inner{display:grid;grid-template-columns:1fr auto;gap:.45rem;padding-top:.55rem;padding-bottom:.55rem;}
+  .header-tools{display:contents;}.header-status{grid-row:2;grid-column:1;}
+  .help-control{grid-row:1;grid-column:2;justify-self:end;}.solve-button{grid-row:2;grid-column:2;justify-self:end;padding:.45rem .65rem;font-size:.76rem;}
+  .header-status .status-badge{font-size:.72rem;}.product-name{grid-row:1;grid-column:1;}
+  .help-button{width:1.8rem;height:1.8rem;}.help-panel{width:min(21rem,calc(100vw - 1.5rem));}
+  .first-steps {padding:.45rem;}.first-steps strong{display:none;}
+  .view-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.1rem;}
+  .view-tabs button svg{display:none;}.view-tabs button{padding:.45rem .25rem;justify-content:center;}
+}

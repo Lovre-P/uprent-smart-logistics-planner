@@ -14,7 +14,7 @@ export function AlternativeStrip({alternatives,applySettings,disabled=false}:{
     <h3><GitBranch size={16} aria-hidden="true"/>Drugo tumačenje</h3>
     {alternatives.map((row,index)=><div className="alternative-row" key={row.setting}>
       <p>{reading(row)} <span className="alternative-metric">→ {formatKm(row.km)}</span>
-        <span className="alternative-detail"> · {row.summary} · {row.served} izvršenih naloga</span></p>
+        <span className="alternative-detail"> {row.summary} Izvršeno {row.served} naloga.</span></p>
       <button type="button" disabled={disabled} aria-label={index ? 'Primijeni: '+reading(row):'Primijeni'}
         onClick={()=>applySettings({[row.setting]:row.value})}>Primijeni<ArrowRight size={14} aria-hidden="true"/></button>
     </div>)}

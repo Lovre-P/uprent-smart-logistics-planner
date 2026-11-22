@@ -43,3 +43,11 @@ it('otkriva detalje svakog koraka fokusom, mišem i dodirom, uključujući povra
   fireEvent.click(markers.at(-1)!)
   expect(screen.getByRole('status').textContent).toMatch(/Povratak.*L0/)
 })
+
+it('označava podudarne lokacije zajedničkim natpisom umjesto dvaju preklopljenih natpisa', () => {
+  const locations = scenario.locations.map(l => l.id === 'L1' ? {...l, x:0, y:0} : l)
+  render(<MapView scenario={{...scenario, locations}} result={standard} />)
+  expect(screen.getAllByTestId(/^loc-/)).toHaveLength(10)
+  expect(screen.getByTestId('loc-L0').closest('text')?.textContent).toBe('L0 / L1 · Baza')
+  expect(screen.getByTestId('loc-L0').closest('text')).toBe(screen.getByTestId('loc-L1').closest('text'))
+})

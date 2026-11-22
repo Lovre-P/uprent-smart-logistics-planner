@@ -1,0 +1,20 @@
+.route-map { min-width: 0; }
+.route-map__panel { border: 1px solid var(--line, #cbd2cc); border-radius: .7rem; overflow: hidden; background: #fff; }
+.route-map__legend { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem 1.4rem; padding: .7rem 1rem; margin: 0; border-bottom: 1px solid var(--line, #cbd2cc); }
+.route-map__legend li { display: flex; align-items: center; gap: .45rem; font-size: .79rem; color: var(--muted); }
+.route-map__legend strong { color: #1d3238; }
+.route-map__legend li > span { width: 15px; height: 4px; border-radius: 4px; }
+.route-map__canvas { background: #f7f9f6; }
+.route-map__canvas svg { display: block; width: 100%; }
+.map-tick line { stroke: #dce3dd; stroke-width: 1; }
+.map-tick--origin line { stroke: #a4b4a8; stroke-width: 1.4; }
+.map-tick text, .map-axis { font-size: 10px; fill: #526168; font-variant-numeric: tabular-nums; }
+.map-axis { font-weight: 700; }
+.map-depot { fill: #203b37; stroke: white; stroke-width: 1.5; }
+.map-location { fill: #fff; stroke: #334940; stroke-width: 2; }
+.map-label { font-size: 12px; font-weight: 700; fill: #233c37; paint-order: stroke; stroke: #f7f9f6; stroke-width: 3px; }
+.map-step { cursor: pointer; outline: none; }
+.map-step circle { stroke: #fff; stroke-width: 1.3px; }
+.map-step:hover circle, .map-step:focus-visible circle, .map-step[aria-pressed="true"] circle { stroke: #152c24; stroke-width: 2px; }
+.map-step text { fill: white; font-size: 9px; font-weight: 700; pointer-events: none; font-variant-numeric: tabular-nums; }
+.route-map__detail { padding: .7rem 1rem; margin: 0; min-height: 2.5rem; font-size: .8rem; line-height: 1.5; border-top: 1px solid var(--line, #cbd2cc); overflow-wrap: anywhere; }
