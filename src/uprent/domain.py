@@ -12,7 +12,7 @@ class ScenarioError(ValueError):
     """Pogreška ulaznih podataka koja se može prikazati korisniku."""
 
 
-def _input_error(exc: ValidationError) -> ScenarioError:
+def input_error(errors: list) -> ScenarioError:
     messages = {
         "missing": "nedostaje obavezno polje",
         "extra_forbidden": "nepoznato polje",
@@ -26,7 +26,7 @@ def _input_error(exc: ValidationError) -> ScenarioError:
         "literal_error": "nepoznata vrijednost postavke",
     }
     descriptions = []
-    for error in exc.errors(include_url=False, include_input=False):
+    for error in errors:
         field = ".".join(str(part) for part in error["loc"])
         underlying = error.get("ctx", {}).get("error")
         message = str(underlying) if underlying is not None else messages.get(
@@ -110,7 +110,7 @@ class Scenario(InputModel):
         try:
             return super().model_validate(obj, **kwargs)
         except ValidationError as exc:
-            raise _input_error(exc) from exc
+            raise input_error(exc.errors(include_url=False, include_input=False)) from exc
 
     @model_validator(mode="after")
     def check_references(self) -> Self:

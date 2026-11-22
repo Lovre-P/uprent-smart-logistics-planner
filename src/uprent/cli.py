@@ -42,6 +42,9 @@ def _parser():
                       help="Promijeni postavku za ovaj izračun. Opcija se može ponoviti.")
     variants = commands.add_parser("compare", prog="uprent compare", help="Usporedi šest tumačenja scenarija.")
     variants.add_argument("path", metavar="PUTANJA", help="JSON datoteka sa scenarijem.")
+    server = commands.add_parser("serve", prog="uprent serve", help="Pokreni API i web-sučelje.")
+    server.add_argument("--host", default="127.0.0.1", metavar="ADRESA", help="Adresa poslužitelja.")
+    server.add_argument("--port", type=int, default=8000, metavar="PORT", help="Port poslužitelja.")
     return parser
 
 
@@ -112,6 +115,14 @@ def main(argv: list[str] | None = None) -> int:
             args = _parser().parse_args(argv)
         except SystemExit as exc:
             return int(exc.code or 0)  # argparse help
+        if args.command == "serve":
+            import uvicorn
+            from uprent.api import create_app
+
+            if not 1 <= args.port <= 65535:
+                raise ScenarioError("Port mora biti između 1 i 65535.")
+            uvicorn.run(create_app(), host=args.host, port=args.port)
+            return 0
         scenario = load_scenario(args.path)
         if args.command == "compare":
             from uprent.compare import compare
