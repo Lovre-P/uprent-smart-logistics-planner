@@ -2,7 +2,7 @@
 
 ## 22. 11. 2026. — Predprovjera može izostaviti izvediv nalog
 
-**Odluka vlasnika je otvorena.** Specifikacija §5 propisuje zaokruživanje svake dionice na desetinku kilometra. Prema §11 i zadacima 4 i 8, predprovjera izostavlja nalog ako njegova samostalna vožnja premašuje limit na svakom dopuštenom kamionu. Nakon zaokruživanja vožnja preko mjesta utovara drugog naloga može biti kraća od izravne dionice. U tom slučaju izostavljanje krši zahtjev iz §6 da se izvrši najveći mogući broj naloga i može dovesti do pogrešnog statusa `NO_FULL_PLAN` iz §8.
+**Nalaz u specifikaciji v4.1.** Specifikacija §5 propisuje zaokruživanje svake dionice na desetinku kilometra. Prema §11 i zadacima 4 i 8, predprovjera izostavlja nalog ako njegova samostalna vožnja premašuje limit na svakom dopuštenom kamionu. Nakon zaokruživanja vožnja preko mjesta utovara drugog naloga može biti kraća od izravne dionice. U tom slučaju izostavljanje krši zahtjev iz §6 da se izvrši najveći mogući broj naloga i može dovesti do pogrešnog statusa `NO_FULL_PLAN` iz §8.
 
 ### Primjer koji se može ponoviti
 
@@ -19,7 +19,7 @@ Limit je točno 678 s. Kamion u bazi utovari M01, u L1 utovari M02, u L2 istovar
 
 Predprovjera može izostaviti nalog zbog vremena samo kad dokaže da i **donja granica** vremena prelazi limit na svakom dopuštenom kamionu. Za svaku od tri dionice samostalne rute donja granica može se dobiti najkraćim putem kroz mrežu već zaokruženih udaljenosti između lokacija. Ako se radnje računaju u limit, dodaje se i trajanje utovara i istovara tog naloga. Kad granica stane u limit, odluku donosi solver. Stvarne rute i validator i dalje računaju svaku prijeđenu dionicu prema §5.
 
-Na izvornim koordinatama provjerene su donje granice od 60,2 km za N06, 34,5 km za N09 i 38,4 km za N04. Time ostaju očuvani referentni primjeri predprovjere iz zadatka 4. Predložena izmjena odnosi se samo na dokaz za izostavljanje naloga. Čeka odobrenje i regresijski test s gornjim primjerom.
+Na izvornim koordinatama provjerene su donje granice od 60,2 km za N06, 34,5 km za N09 i 38,4 km za N04. Time ostaju očuvani referentni primjeri predprovjere iz zadatka 4. Predložena izmjena odnosi se samo na dokaz za izostavljanje naloga. Vlasnik je odobrio izmjenu i regresijski test s gornjim primjerom.
 
 ### Odluka (22. 11. 2026.)
 
@@ -32,3 +32,8 @@ Odobreno; specifikacija je ažurirana na v4.2.
 - Plan, zadatak 8: `test_rounding_shortcut_full_plan`.
 
 Implementacija nastavlja od zadatka 1.
+
+## 22. 11. 2026. — Prikvačeni nalozi u Python sučelju OR-Toolsa
+
+U verziji 9.15.6755 poziv `SetAllowedVehiclesForIndex([0], index)` s Pythonovom listom javlja `TypeError` pri pretvorbi u `absl::Span< int const >`. Za utovar i istovar prikvačenog naloga koristi se `VehicleVar(index).SetValues([-1, v])`. Vrijednost `v` označava dopušteni kamion, a −1 izostavljeni nalog. U modelu s dva kamiona provjereno je da postavka za kamion 0 dopušta vrijednosti −1 i 0, a odbija 1.
+
