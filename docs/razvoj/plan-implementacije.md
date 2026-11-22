@@ -287,8 +287,8 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Datoteke:** kreiraj `web/src/features/map/MapView.tsx`, `web/src/features/timeline/TimelineView.tsx`, `web/src/features/analysis/{AnalysisView,CurveChart,ComparisonTable}.tsx`, `web/src/App.tsx` (raspored iz spec §13, traka „Prvi koraci", izbornik „?"), testove.
 
-- [ ] **Korak 1: Testovi:** `map renders locations` (10 elemenata `data-testid^="loc-"`); `map routes` (zadano 1 ruta, strict 2); `timeline segments` (B: 20 traka radnji; zbroj duljina traka vožnje = 182,2 min; dionice od 0 km se ne crtaju; crta limita s oznakom „samo vožnja"); `analysis why table` (N03 redak „+17,9 km"); `why row pins order` (klik „prikaži plan" u retku N04 → `applySettings({pinned_orders: {N04: "A"}})`); `curve points` (14 točaka; klik → `applySettings({pinned_orders: …})` za sve naloge); `first steps strip` (vidljiv pri prvom otvaranju, nakon zatvaranja se ne prikazuje; vraća se iz izbornika „?"); `narrow layout` (širina 390 → postavke iza gumba „Postavke").
-- [ ] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat(web): map, timeline, analysis and layout`.
+- [x] **Korak 1: Testovi:** `map renders locations` (10 elemenata `data-testid^="loc-"`); `map routes` (zadano 1 ruta, strict 2); `timeline segments` (B: 20 traka radnji; zbroj duljina traka vožnje = 182,2 min; dionice od 0 km se ne crtaju; crta limita s oznakom „samo vožnja"); `analysis why table` (N03 redak „+17,9 km"); `why row pins order` (klik „prikaži plan" u retku N04 → `applySettings({pinned_orders: {N04: "A"}})`); `curve points` (14 točaka; klik → `applySettings({pinned_orders: …})` za sve naloge); `first steps strip` (vidljiv pri prvom otvaranju, nakon zatvaranja se ne prikazuje; vraća se iz izbornika „?"); `narrow layout` (širina 390 → postavke iza gumba „Postavke").
+- [x] **Korak 2–5:** FAIL → implementacija → PASS → commit `feat(web): map, timeline, analysis and layout`.
 
 ### Zadatak 16: E2E testovi i build
 

@@ -17,6 +17,7 @@
 | 22. 11. 2026. | 10 | CLI i šest unaprijed zadanih usporedbi. Provjeren je UTF-8 JSON kroz stvarnu naredbu. | 212 Python + 32 web | `7cd265b` |
 | 22. 11. 2026. | 11 | FastAPI, validacija ulaza, usporedba i posluživanje aplikacije. | 223 Python + 32 web | `ef68fdc` |
 | 22. 11. 2026. | 14 | Plan po kamionu, neovisne provjere i usporedba solvera uz odbacivanje zastarjelih odgovora. | 223 Python + 46 web | `90d717d` |
+| 22. 11. 2026. | 15 | Karta s 10 lokacija, vremenska crta, 14 raspodjela i svih šest kartica na 390 i 1280 px. | 223 Python + 66 web | `af278a3` |
 
 Naknadni pregled zadatka 13 otkrio je da je uređivač prihvaćao nevaljano trajanje na nalogu, pogrešan tip postavke u JSON-u i zadržavao nacrt nakon vraćanja zadanih vrijednosti. Ispravci su u commitu `38cbb0d`, uz 113 prolaznih Python testova i 32 testa sučelja.
 
