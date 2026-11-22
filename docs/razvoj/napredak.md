@@ -14,6 +14,7 @@
 | 22. 11. 2026. | 7 | OR-Tools 9.15. Provjerene su obje vremenske dimenzije, prikvačivanja i statusi nakon predprovjere. | 144 Python + 32 web | `99dcb2e` |
 | 22. 11. 2026. | 8 | Servis razlikuje dokazani ishod i istek heurističke pretrage. Regresijski primjer vraća OPTIMAL, 2/2 i 11,3 km. | 166 Python + 32 web | `6b7dd04` |
 | 22. 11. 2026. | 9 | Analiza pinova, granica i 14 nedominiranih raspodjela. Provjera na 72 konfiguracije. | 189 Python + 32 web | `53716b1` |
+| 22. 11. 2026. | 10 | CLI i šest unaprijed zadanih usporedbi. Provjeren je UTF-8 JSON kroz stvarnu naredbu. | 212 Python + 32 web | `7cd265b` |
 
 Naknadni pregled zadatka 13 otkrio je da je uređivač prihvaćao nevaljano trajanje na nalogu, pogrešan tip postavke u JSON-u i zadržavao nacrt nakon vraćanja zadanih vrijednosti. Ispravci su u commitu `38cbb0d`, uz 113 prolaznih Python testova i 32 testa sučelja.
 
