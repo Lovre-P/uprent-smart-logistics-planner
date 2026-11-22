@@ -106,7 +106,7 @@ Fiksne rute (`tests/fixtures/routes.py`; `P:` = PICKUP, `D:` = DELIVERY):
 - `BOUNDARY_A` (38,4 km): `P:N04 D:N04`
 - `BOUNDARY_B` (180,4 km): `P:N05 P:N01 P:N02 D:N05 P:N07 D:N07 D:N01 D:N02 P:N06 D:N06 P:N10 D:N10 P:N08 P:N03 D:N08 P:N09 D:N09 D:N03`
 
-- [ ] **Korak 1: Testovi:**
+- [x] **Korak 1: Testovi:**
   - `test_b_alone_valid_by_default`: `passed`; B: km 182,2, `drive_min` 182,2, `handling_min` 400, `total_min` 582,2, `peak_kg` 9400, `peak_slots` 3, 21 korak (zadnji `RETURN`); A: `used is False`, km 0.
   - `test_b_alone_invalid_when_handling_counts`: uz `limit_includes_handling=True` provjera `vrijeme` pada, `detail` sadrži „582,2".
   - `test_strict_plan_valid`: `STRICT_A`+`STRICT_B` uz `limit_includes_handling=True` → `passed`, ukupno 200,1; B `total_min` 522,9, `peak_kg` 9900; A `total_min` 77,2.
@@ -120,7 +120,7 @@ Fiksne rute (`tests/fixtures/routes.py`; `P:` = PICKUP, `D:` = DELIVERY):
   - `test_unused_truck_is_info`: `B_ALONE` uz `require_all_trucks=True` → `passed` true; `svi_kamioni` ima `severity == "info"` i `passed is False`.
   - `test_reported_unserved_mismatch`: `STRICT_A`+`STRICT_B` s `reported_unserved=["N05"]` → `neizvrseni_dosljedno` pada; bez polja → „nije primjenjivo".
   - `test_validator_does_not_import_solvers`: čitaj izvor `validator.py`; ne smije sadržavati „uprent.solvers" ni „uprent.distance".
-- [ ] **Korak 2:** → FAIL. **Korak 3:** implementiraj; satnica iz `settings.day_start`; minute zaokruži na 0,1 samo za prikaz. **Korak 4:** → PASS. **Korak 5:** commit `feat: independent validator`.
+- [x] **Korak 2:** → FAIL. **Korak 3:** implementiraj; satnica iz `settings.day_start`; minute zaokruži na 0,1 samo za prikaz. **Korak 4:** → PASS. **Korak 5:** commit `feat: independent validator`.
 
 ### Zadatak 4: Predprovjera naloga
 

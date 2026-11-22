@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Barlow', 'Bahnschrift', 'Segoe UI', sans-serif;
+  color: #202b30;
+  background: #f4f5f0;
+  --ink: #202b30;
+  --muted: #526168;
+  --line: #d1d8d0;
+  --paper: #fff;
+  --brand: #164e45;
+  --brand-light: #e4f1e8;
+  --truck-a: #2866ad;
+  --truck-b: #bc550f;
+  font-variant-numeric: tabular-nums;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button:not(:disabled), summary { cursor: pointer; }
+:focus-visible { outline: 3px solid #2873b8; outline-offset: 3px; }
+.hint-trigger { display: inline-grid; place-items: center; vertical-align: middle; width: 1.6rem; height: 1.6rem; flex: none; border-radius: 50%; color: var(--muted); }
+.hint-trigger:hover, .hint-trigger[aria-expanded=true] { color: var(--brand); background: var(--brand-light); }
+.hint-popover { position: fixed; z-index: 90; width: min(18rem, calc(100vw - 16px)); padding: .8rem 1rem; border: 1px solid #425657; border-radius: .4rem; background: #1b3030; box-shadow: 0 6px 24px #162f3126; color: #f1f8f5; font-size: .85rem; line-height: 1.5; }
+.hint-popover strong { display: block; margin-bottom: .25rem; color: #fff; }
+.info-line { color: var(--muted); font-size: .9rem; line-height: 1.5; margin: .25rem 0 .75rem; }
+.status-badge, .callout { display: inline-flex; align-items: center; gap: .45rem; }
+.status-badge { border-radius: 2rem; padding: .35rem .75rem; font-size: .8rem; font-weight: 650; }
+.status-badge--success { background: #daefdd; color: #174b30; }
+.status-badge--warning, .callout--warning { background: #fff1ce; color: #694306; }
+.status-badge--error, .callout--error { background: #ffe8e4; color: #872e24; }
+.callout { display: flex; align-items: flex-start; padding: .85rem 1rem; line-height: 1.5; border-radius: .35rem; border-left: 3px solid currentColor; }
+.callout svg { flex: none; margin-top: .12rem; }
+.callout--info { background: #e5efe9; color: #204e43; }
