@@ -4,5 +4,6 @@
 |---|---|---|---:|---|
 | 22. 11. 2026. | Prije zadatka 1 | Zaustavljeno pri početnoj provjeri specifikacije. Izostavljanje naloga prema §11 može onemogućiti valjan potpuni plan. | 0 pokrenutih | — |
 | 22. 11. 2026. | 1 | Domenski modeli, provjera ulaza i zeleni GitHub Actions. | 36 | `8b842bf` |
+| 22. 11. 2026. | 2 | Matrični izračun udaljenosti, zaokruživanje i točno vrijeme vožnje. | 40 | `a97a975` |
 
 Vlasnik je 22. 11. odobrio specifikaciju v4.2. Predprovjera koristi donju granicu od 11,2 km za N01 u regresijskom primjeru, a potpuni plan ima 11,3 km. [Odluka i primjer](odstupanja.md).

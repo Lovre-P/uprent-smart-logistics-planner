@@ -83,12 +83,12 @@
 **Sučelja:**
 - Proizvodi: `leg_tenths(a: Location, b: Location) -> int`; `drive_seconds(tenths: int, speed_kmh: float) -> Fraction`; `distance_matrix(scenario: Scenario) -> dict[tuple[str, str], int]`.
 
-- [ ] **Korak 1: Testovi:**
+- [x] **Korak 1: Testovi:**
   - `test_task_legs`: L0→L9 == 94, L9→L4 == 170, L4→L0 == 108 (zbroj 372 = 37,2 km).
   - `test_half_up`: točke (0,0) i (0.05,0) → 1 (0,05 km → 0,1 km).
   - `test_identical_coordinates_zero`: dvije lokacije s istim (x, y) → 0.
   - `test_drive_seconds`: `drive_seconds(94, 60) == 564`; `drive_seconds(1822, 60) == 10932`.
-- [ ] **Korak 2:** pokreni → FAIL. **Korak 3:** implementiraj (`Decimal(...).sqrt()`, `quantize(Decimal("1"), ROUND_HALF_UP)` nad km×10). **Korak 4:** → PASS. **Korak 5:** commit `feat: distance and time`.
+- [x] **Korak 2:** pokreni → FAIL. **Korak 3:** implementiraj (`Decimal(...).sqrt()`, `quantize(Decimal("1"), ROUND_HALF_UP)` nad km×10). **Korak 4:** → PASS. **Korak 5:** commit `feat: distance and time`.
 
 ### Zadatak 3: Plan i neovisni validator
 
