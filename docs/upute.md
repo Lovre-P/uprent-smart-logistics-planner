@@ -43,7 +43,7 @@ Zadane vrijednosti su najočitije, doslovno tumačenje teksta zadatka.
 | Svaki kamion mora voziti | isključeno | Uključeno: svaki kamion dobiva barem jedan nalog kad je to moguće (na podacima iz zadatka 200,1 km). |
 | Djelomičan plan | uključeno | Ako sve naloge nije moguće izvršiti, izvrši se najviše što se može, a ostali dobiju upozorenje s razlogom. |
 | Cilj | najmanje km | Druga mogućnost: najraniji završetak posljednjeg kamiona (na podacima iz zadatka 284,2 km, svi gotovi za 5 h 45 min). |
-| Napredno: solver, vrijeme pretrage, usporedba s OR-Toolsom, početak smjene | auto, 3 s, da, 07:00 | Auto koristi egzaktni solver do 12 naloga i 3 kamiona, a iznad toga OR-Tools. Početak smjene služi samo za satnicu. |
+| Napredno: solver, vrijeme pretrage, usporedba s OR-Toolsom, početak smjene | auto, 3 s, da, 07:00 | Auto bira egzaktni solver do 12 naloga koji prođu predprovjeru i 3 kamiona. Veće ulaze preuzima OR-Tools, kao i izračune koji dosegnu granicu vremena ili broja stanja. Početak smjene služi samo za satnicu. |
 
 Brzina kamiona (60 km/h) zadaje se po kamionu u kartici Ulazni podaci.
 
@@ -57,12 +57,12 @@ Brzina kamiona (60 km/h) zadaje se po kamionu u kartici Ulazni podaci.
 ## 5. Čitanje plana
 
 - **Kartice brojki:** ukupni km, izvršeno X/Y naloga i korišteni kamioni.
-- **Drugo tumačenje:** traka s rezultatom uz suprotnu vrijednost postavke („U 9 h ulazi utovar/istovar", „Svaki kamion mora voziti") i gumbom **Primijeni**.
+- **Drugo tumačenje:** ako suprotna vrijednost postavke („U 9 h ulazi utovar/istovar", „Svaki kamion mora voziti") mijenja egzaktni rezultat, traka prikazuje taj rezultat i gumb **Primijeni**. Nakon sporijeg izračuna dodatnu analizu možete pokrenuti na zahtjev.
 - **Kartica kamiona:** niz lokacija od baze do baze, km, broj naloga, vožnja i ukupno radno vrijeme, rezerva do limita. Kamion bez naloga ima oznaku „nije korišten" i poveznicu „zašto?".
 - **Tablica koraka:** lokacija, radnja (utovar, istovar ili povratak), nalog i stroj, dionica, ukupni km, satnica te teret u kg i broj strojeva **nakon** radnje, s trakom do nosivosti.
 - **Upozorenja (zahtjev 8):** žute kartice s razlogom:
   - pretežak stroj;
-  - nalog ne stane u limit ni sam;
+  - čak i donja granica potrebnog vremena prelazi dnevni limit, računajući najkraće putove preko svih lokacija utovara i istovara;
   - nalog ne stane uz ostale (uz egzaktni solver to je dokazano);
   - OR-Tools ga nije uključio (to nije dokaz).
 
@@ -89,9 +89,10 @@ Popis svih pravila koja je neovisni validator provjerio: baza, nosivost, broj st
 flowchart LR
     UI[Sučelje] -->|scenarij + postavke| API[FastAPI]
     API --> PRE[Provjera ulaza i predprovjera naloga]
-    PRE --> AUTO{do 12 naloga?}
+    PRE --> AUTO{Do 12 naloga i 3 kamiona?}
     AUTO -->|da| EX[Egzaktni solver]
     AUTO -->|ne| OT[OR-Tools]
+    EX -->|dosegnuta zaštitna granica| OT
     EX --> VAL[Neovisni validator]
     OT --> VAL
     VAL --> AN[Analiza]
@@ -101,9 +102,9 @@ flowchart LR
 1. Sučelje šalje scenarij (podatke i postavke) na `POST /api/solve`.
 2. Provjera ulaza odbija nemoguće podatke s porukom. Predprovjera označi naloge koji se sigurno ne mogu izvršiti.
 3. Auto bira solver. Solver vraća samo redoslijed radnji po kamionu.
-4. Validator taj redoslijed ponovno simulira i računa sve brojke: km, vremena, teret nakon svake radnje. Ako ijedno pravilo padne, plan se ne prikazuje kao valjan.
+4. Validator ponovno simulira taj redoslijed te računa kilometre, vrijeme i teret nakon svake radnje. Kršenje obveznog pravila čini plan nevaljanim. Nekorišten kamion uz uključenu postavku „Svaki kamion mora voziti” dobiva zasebnu informativnu napomenu.
 5. Analiza dodaje objašnjenja, drugo tumačenje i krivulju.
-6. Nakon prikaza sučelje šalje drugi zahtjev s OR-Toolsom i prikazuje slažu li se rezultati.
+6. Nakon prikaza valjanog egzaktnog plana sučelje pokreće zaseban izračun OR-Toolsom ako je usporedba uključena. Rezultati se prikazuju na kartici Provjera.
 
 ## 10. Naredbeni redak i API
 
@@ -120,6 +121,6 @@ API dokumentacija je dostupna dok server radi: **http://127.0.0.1:8000/docs**.
 ## 11. Česta pitanja
 
 - **Zašto kamion A ne vozi?** B stigne sve sam za 3 h 02 min vožnje, a svaki nalog prebačen na A dodao bi najmanje 17,9 km. Ako u 9 h ulazi i utovar/istovar, B bi radio 9 h 42 min, pa A preuzima N03 (200,1 km).
-- **Zašto piše „Najbolje pronađeno", a ne „Dokazano optimalno"?** Ulaz ima više od 12 naloga, pa radi OR-Tools, koji ne daje dokaz.
+- **Kada piše „Najbolje pronađeno”?** Plan je izračunao OR-Tools. Možete ga odabrati u postavkama. U automatskom načinu preuzima velike scenarije i izračune koji dosegnu granicu egzaktnog solvera.
 - **Port 8000 je zauzet:** `uv run uprent serve --port 8010`.
 - **Vratiti sve na početak:** izbornik ? → „Vrati podatke i postavke iz zadatka".

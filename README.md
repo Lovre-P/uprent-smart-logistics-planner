@@ -18,7 +18,7 @@ Otvori **http://127.0.0.1:8000**. Plan za podatke iz zadatka izračuna se sam.
 ## Kroz aplikaciju u jednoj minuti
 
 1. **Plan** – ukupni km, raspored po kamionu i tablica svakog koraka: lokacija, radnja, teret nakon radnje i satnica.
-2. **Postavke** (lijevo) – svako tumačenje iz zadatka može se promijeniti, a ⓘ objašnjava što mijenja. Ispod rezultata uvijek piše što bi dalo drugo tumačenje i može se primijeniti jednim klikom.
+2. **Postavke** (lijevo) – svako tumačenje iz zadatka može se promijeniti, a ⓘ objašnjava što mijenja. Kad drugo tumačenje daje drukčiji egzaktni rezultat, možete ga primijeniti jednim klikom. Za sporije izračune usporedbu pokrećete gumbom.
 3. **Ulazni podaci** – pregled i uređivanje lokacija, strojeva, kamiona i naloga. Nalog koji se ne može izvršiti dobiva jasno upozorenje s razlogom.
 4. **Karta**, **Vremenska crta**, **Analiza** (zašto je plan takav i što ako) i **Provjera** (neovisna provjera svakog pravila).
 
@@ -30,6 +30,8 @@ Otvori **http://127.0.0.1:8000**. Plan za podatke iz zadatka izračuna se sam.
 | U 9 h ulazi i utovar/istovar (ili: oba kamiona moraju voziti) | **200,1 km** | A vozi N03 (37,2 km), B ostalih 9 naloga (162,9 km, 8 h 43 min) |
 
 Obrazloženje tumačenja: `docs/PRETPOSTAVKE.md`.
+
+![Zadani plan prijevoza sa svih 10 naloga, kilometražom, satnicom i teretom kamiona B](docs/plan.png)
 
 ## Naredbeni redak
 
@@ -45,18 +47,19 @@ uv run uprent compare data/default_scenario.json
 uv run pytest
 ```
 
-Testovi sučelja (traže Node 20+), iz mape `web`:
+Za testove sučelja koristite Node 24. U mapi `web` pokrenite
 
 ```
 npm ci
 npm test
+npx playwright install chromium
 npm run e2e
 ```
 
 ## Kako radi (ukratko)
 
-- **Egzaktni solver** (dinamičko programiranje) pregleda sve dopuštene rasporede za do 12 naloga, pa je rezultat dokazani optimum.
-- **OR-Tools** preuzima veće ulaze: brzo daje dobar plan, ali bez dokaza optimalnosti.
+- **Egzaktni solver** dinamičkim programiranjem dokazuje optimum. Automatski se bira za najviše 12 naloga koji prođu predprovjeru i najviše tri kamiona.
+- **OR-Tools** traži najbolji plan u zadanom vremenu. Preuzima veće ulaze i izračune u kojima egzaktni solver dosegne sigurnosnu granicu broja stanja ili vremena.
 - **Neovisni validator** ponovno simulira svaki plan radnju po radnju i daje sve brojke koje se prikazuju. Plan koji ne prođe validator nikad se ne prikazuje kao valjan.
 
 Detaljnije: `docs/LOGIKA.md`.
@@ -71,4 +74,4 @@ Detaljnije: `docs/LOGIKA.md`.
 | `docs/AI_ALATI.md` | korišteni AI alati i način provjere njihovih rezultata |
 | `docs/VRIJEME.md` | procjena stvarnog vremena razvoja |
 | `docs/deploy.md` | Docker i Cloudflare |
-| `docs/razvoj/` | specifikacija, plan implementacije, QA plan i QA izvještaj |
+| `docs/razvoj/` | specifikacija, plan implementacije, dnevnik provjera i plan zasebnog QA postupka |

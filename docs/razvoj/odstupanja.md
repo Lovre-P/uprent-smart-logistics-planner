@@ -43,3 +43,9 @@ Za izračun krivulje i gornje granice limita vrijede zaštite od milijun razmotr
 
 Ugrađenih šest usporedbi koristi iste ulazne podatke i dnevni limit. Kao osnovu uzimaju doslovno tumačenje vremena, korištenja kamiona i cilja iz zadatka. Vlastite varijante zadane u API pozivu mijenjaju odabrana polja trenutačnog scenarija.
 
+## Upute za lokalno pokretanje
+
+README je prvotno navodio Node 20+, što obuhvaća i izdanja koja zaključane verzije Vitea i Vitesta ne podržavaju. Testovi sučelja koriste Node 24. Dodana je naredba za instalaciju Chromiuma koji treba Playwrightu na novom računalu. Za samo pokretanje aplikacije dovoljan je uv.
+
+Upute sada opisuju kada su dostupna druga tumačenja i usporedba solvera, te razlikuju obvezna pravila od informativne provjere korištenja svih kamiona. Za vremensku predprovjeru vrijedi donja granica iz odobrene specifikacije v4.2.
+

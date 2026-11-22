@@ -294,10 +294,10 @@ Tok `solve`: provjera ulaza → `precheck` → izvedivi nalozi → izbor solvera
 
 **Datoteke:** kreiraj `web/playwright.config.ts` (webServer: `uv run uprent serve --port 8765`), `web/e2e/smoke.spec.ts`; izgradi `web/dist`.
 
-- [ ] **Korak 1:** `cd web && npm run build` → nastaje `web/dist`.
-- [ ] **Korak 2: Testovi** (`smoke.spec.ts`): `loads default plan` (vidljivo „182,2 km" i „Dokazano optimalno"); `apply alternative reading` (klik „Primijeni" → „200,1 km"); `heavy order warning` (Podaci → dodaj M11 12000 i N11 → upozorenje s „N11"; „10/11"); `hint explains limit` (ⓘ uz „U 9 h ulazi utovar/istovar" → tekst sadrži „voziti"); `reset` (izbornik „?" → „Vrati podatke i postavke iz zadatka" → „182,2 km"); `mobile` (390×844: nema vodoravnog pomicanja, gumb „Postavke" vidljiv).
-- [ ] **Korak 3:** `npx playwright install chromium`; `npm run e2e` → PASS.
-- [ ] **Korak 4:** u `.github/workflows/ci.yml` dodaj posao za sučelje (`npm ci`, `npm test` u `web`); commit `test(web): e2e smoke tests and production build` (uključi `web/dist`); `git push`; CI zelen.
+- [x] **Korak 1:** `cd web && npm run build` → nastaje `web/dist`.
+- [x] **Korak 2: Testovi** (`smoke.spec.ts`): `loads default plan` (vidljivo „182,2 km" i „Dokazano optimalno"); `apply alternative reading` (klik „Primijeni" → „200,1 km"); `heavy order warning` (Podaci → dodaj M11 12000 i N11 → upozorenje s „N11"; „10/11"); `hint explains limit` (ⓘ uz „U 9 h ulazi utovar/istovar" → tekst sadrži „voziti"); `reset` (izbornik „?" → „Vrati podatke i postavke iz zadatka" → „182,2 km"); `mobile` (390×844: nema vodoravnog pomicanja, gumb „Postavke" vidljiv).
+- [x] **Korak 3:** `npx playwright install chromium`; `npm run e2e` → PASS.
+- [x] **Korak 4:** u `.github/workflows/ci.yml` dodaj posao za sučelje (`npm ci`, `npm test` u `web`); commit `test(web): e2e smoke tests and production build` (uključi `web/dist`); `git push`; CI zelen.
 
 ### Zadatak 17: Dokumentacija predaje
 
