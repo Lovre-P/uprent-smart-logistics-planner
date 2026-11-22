@@ -42,6 +42,13 @@ def test_binding_default(default):
     assert any("Limit vožnje nije aktivan" in text and "3 h 02 min" in text for text in default.binding)
 
 
+def test_binding_distinguishes_route_slack_from_better_plan(scenario):
+    a = solve(apply_overrides(scenario, {"day_limit_min": 180})).analysis
+    assert a.sensitivity.better_plan_at_min == 182.2
+    assert all("nije aktivan" not in text for text in a.binding)
+    assert any("182,2 min" in text and "bolji plan" in text for text in a.binding)
+
+
 def test_sensitivity_default(default):
     assert "182,2 min" in default.sensitivity.note and "ne mijenja plan" in default.sensitivity.note
 
@@ -84,6 +91,7 @@ def test_analysis_requires_exact_result(scenario):
     a = analyze(scenario, None, validate(scenario, output.plan))
     assert a.curve == a.why == a.alternatives == []
     assert any("egzaktni solver" in text for text in a.binding)
+    assert all("nije aktivan" not in text for text in a.binding)
 
 
 def test_handling_max_no_used_trucks(scenario_data):
@@ -132,3 +140,23 @@ def test_why_keeps_other_existing_pins(scenario):
     s = apply_overrides(scenario, {"pinned_orders": {"N03": "A"}})
     row = next(r for r in solve(s).analysis.why if r.order == "N04" and r.other_truck == "A")
     assert {"N03", "N04"}.issubset(row.other_truck_orders)
+
+
+def test_analysis_guard_keeps_plan_and_discards_incomplete_frontier(scenario, monkeypatch):
+    from uprent import analysis
+    monkeypatch.setattr(analysis, "MAX_ASSIGNMENTS", 1, raising=False)
+    r = solve(scenario)
+    assert r.status == "OPTIMAL" and r.totals.km == 182.2
+    assert not r.analysis.curve and r.analysis.sensitivity.better_plan_at_min is None
+    assert "gornja granica" in r.analysis.sensitivity.note
+    assert any("prekinut" in note.lower() for note in r.analysis.binding)
+    assert all("nije aktivan" not in text for text in r.analysis.binding)
+
+
+def test_many_trucks_one_order_exact_analysis(scenario_data):
+    s = scenario_data
+    s["orders"] = s["orders"][:1]
+    s["trucks"] = [{**s["trucks"][0], "id": f"T{i}"} for i in range(1050)]
+    r = solve(Scenario.model_validate(s), "exact")
+    assert r.status == "OPTIMAL" and r.totals.served == 1
+    assert len(r.analysis.curve) == 1

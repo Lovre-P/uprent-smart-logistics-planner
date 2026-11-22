@@ -324,28 +324,56 @@ def solve_exact(
 
 def iter_full_plan_assignments(
     scenario: Scenario, ctx: ExactContext, *, enforce_limit: bool = True,
+    max_states: int = 1_000_000, deadline_s: float = 8.0,
 ) -> Iterator[Assignment]:
     """Potpune raspodjele za analizu. Za gornju granicu limita uključuju se i dulje rute."""
+    deadline = perf_counter() + deadline_s
     ids = [o.id for o in scenario.orders]
-    options = _choices(scenario, ctx, ids, enforce_limit=enforce_limit, deadline=float("inf"))
+    options = _choices(scenario, ctx, ids, enforce_limit=enforce_limit, deadline=deadline)
     available = [_available(per_truck) for per_truck in options]
-    allocation = {}
+    suffix = [0] * (len(options) + 1)
+    for i in range(len(options) - 1, -1, -1):
+        suffix[i] = suffix[i + 1] | available[i]
+    empty = {t.id: frozenset() for t in scenario.trucks}
 
-    def visit(i: int, remaining: int, km: int, end: Fraction, measured: Fraction) -> Iterator[Assignment]:
-        truck_id = scenario.trucks[i].id
+    def candidates(i, remaining):
         if i == len(options) - 1:
             choice = options[i].get(remaining)
             if choice is not None:
-                yield Assignment({**allocation, truck_id: choice.subset}, km + choice.entry.km_tenths,
-                                 max(end, choice.work), max(measured, choice.measured))
+                yield remaining, choice
             return
-        for mask, choice in _subsets(options[i], remaining & available[i]):
-            allocation[truck_id] = choice.subset
-            yield from visit(i + 1, remaining ^ mask, km + choice.entry.km_tenths,
-                             max(end, choice.work), max(measured, choice.measured))
-        allocation.pop(truck_id, None)
+        yield from _subsets(options[i], remaining & available[i])
 
-    yield from visit(0, (1 << len(ids)) - 1, 0, Fraction(0), Fraction(0))
+    full = (1 << len(ids)) - 1
+    if full & ~suffix[0]:
+        return
+    # Vlastiti stog obilazi jednu granu odjednom. Prazne kamione na kraju
+    # raspodjele upisujemo odjednom, pa dubina Pythonovih poziva ne ovisi o floti.
+    stack = [(0, full, 0, Fraction(0), Fraction(0), {}, candidates(0, full))]
+    visited = 0
+    while stack:
+        i, remaining, km, end, measured, selected, choices = stack[-1]
+        item = next(choices, None)
+        if item is None:
+            stack.pop()
+            continue
+        visited += 1
+        if visited > max_states:
+            raise StateLimitExceeded("Izračun raspodjela prekinut: dosegnuta je granica broja stanja.")
+        if visited % 64 == 1:
+            _check_time(deadline)
+        mask, choice = item
+        left = remaining ^ mask
+        if left & ~suffix[i + 1]:
+            continue
+        allocation = {**selected, scenario.trucks[i].id: choice.subset} if mask else selected
+        new_km = km + choice.entry.km_tenths
+        new_end, new_measured = max(end, choice.work), max(measured, choice.measured)
+        if left == 0:
+            yield Assignment(empty | allocation, new_km, new_end, new_measured)
+        else:
+            stack.append((i + 1, left, new_km, new_end, new_measured, allocation, candidates(i + 1, left)))
+    _check_time(deadline)
 
 
 def full_plan_assignments(scenario: Scenario, ctx: ExactContext) -> list[Assignment]:

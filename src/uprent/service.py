@@ -2,13 +2,14 @@
 
 from time import perf_counter
 
+from uprent.analysis import analyze
 from uprent.domain import Scenario, apply_overrides
 from uprent.plan import Plan
 from uprent.precheck import Reason, precheck
 from uprent.result import Analysis, Sensitivity, SolveResult, Totals, Unserved, Validation
 from uprent.solvers.auto import choose_solver
 from uprent.solvers.base import SolverOutput
-from uprent.solvers.exact import ExactContext, StateLimitExceeded, build_context, solve_exact
+from uprent.solvers.exact import StateLimitExceeded, build_context, solve_exact
 from uprent.solvers.ortools_solver import solve_ortools
 from uprent.validator import ValidationReport, validate
 
@@ -20,14 +21,6 @@ EXACT_SECONDS = 8.0
 def _empty_analysis(scenario: Scenario) -> Analysis:
     basis = "drive+handling" if scenario.settings.limit_includes_handling else "drive"
     return Analysis(sensitivity=Sensitivity(limit_basis=basis))
-
-
-def analyze(scenario: Scenario, ctx: ExactContext | None, report: ValidationReport, *,
-            elapsed_s: float = 0.0, detailed: bool = False) -> Analysis:
-    analysis = _empty_analysis(scenario)
-    if ctx is None:
-        analysis.binding.append("Za analizu raspodjele i osjetljivosti potreban je egzaktni solver.")
-    return analysis
 
 
 def _optimize(s: Scenario, rejected: dict[str, Reason], messages: list[str]) -> SolverOutput:
