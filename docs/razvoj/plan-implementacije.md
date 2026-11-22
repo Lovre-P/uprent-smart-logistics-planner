@@ -54,13 +54,13 @@
 - Proizvodi: `Location(id: str, x: float, y: float, name: str | None)`, `Machine(id: str, weight_kg: int)`, `Truck(id: str, name: str | None, capacity_kg: int, slots: int, speed_kmh: float = 60)`, `Order(id: str, machine: str, pickup: str, delivery: str, load_min: float | None = None, unload_min: float | None = None)`, `Settings` (ključevi i zadano iz Globalnih ograničenja, plus `pinned_orders: dict[str, str] | None = None`), `Scenario(name: str, depot: str, locations, machines, trucks, orders, settings: Settings)`; `load_scenario(path: str | Path) -> Scenario`; `apply_overrides(scenario: Scenario, overrides: dict[str, object]) -> Scenario`; `Scenario.handling_seconds(order_id: str) -> tuple[int, int]`.
 - `ScenarioError(ValueError)` s porukom na hrvatskom koja imenuje polje.
 
-- [ ] **Korak 0:** pripremi repozitorij:
+- [x] **Korak 0:** pripremi repozitorij:
   1. `git init`;
   2. provjeri da `git status` ne prikazuje `originalni-zadatak.md` ni `priprema/`;
   3. prvi commit, samo s postojećim dokumentima (`docs/`, `prompts/`, `qa/`, `data/`, `README.md`, `.gitignore`), poruka `docs: specification, implementation plan and QA plan`;
   4. `gh repo create uprent-smart-logistics-planner --private --source . --remote origin --push` (`gh` je već prijavljen).
-- [ ] **Korak 1:** `uv init --package --name uprent --python 3.11` (ili ručno `pyproject.toml` sa `[project.scripts] uprent = "uprent.cli:main"`); `uv add fastapi uvicorn pydantic "ortools>=9.15,<9.16"`; `uv add --dev pytest httpx hypothesis`. `uv init` ne smije prepisati postojeći `README.md` ni `.gitignore`; ako bi, napravi `pyproject.toml` ručno.
-- [ ] **Korak 2: Napiši testove koji padaju** (`tests/test_domain.py`):
+- [x] **Korak 1:** `uv init --package --name uprent --python 3.11` (ili ručno `pyproject.toml` sa `[project.scripts] uprent = "uprent.cli:main"`); `uv add fastapi uvicorn pydantic "ortools>=9.15,<9.16"`; `uv add --dev pytest httpx hypothesis`. `uv init` ne smije prepisati postojeći `README.md` ni `.gitignore`; ako bi, napravi `pyproject.toml` ručno.
+- [x] **Korak 2: Napiši testove koji padaju** (`tests/test_domain.py`):
   - `test_default_scenario_loads`: 10 lokacija, 10 strojeva, 2 kamiona, 10 naloga; `settings.limit_includes_handling is False`, `settings.require_all_trucks is False`, `settings.load_min == 20`.
   - `test_missing_settings_use_defaults`: scenarij bez ključa `settings` → `Settings()` zadane vrijednosti.
   - `test_rejects_unknown_location`: `pickup="L99"` → `ScenarioError` s „nepoznata lokacija" i „N01".
@@ -71,10 +71,10 @@
   - `test_apply_overrides_json`: `{"pinned_orders": "{\"N04\": \"A\"}"}` → `{"N04": "A"}`; vrijednosti koje počinju s `{` ili `[` čitaju se kao JSON.
   - `test_rejects_empty_trucks`, `test_rejects_unknown_depot`, `test_rejects_bad_day_start` („7h"), `test_rejects_bad_ortools_limit` (0 i 31).
   - `test_pinned_validation`: nepoznati nalog ili kamion → greška; `{"N06": "A"}` → poruka sadrži „N06" i „3.500 kg".
-- [ ] **Korak 3:** `uv run pytest tests/test_domain.py -q` → očekuj FAIL (nema modula).
-- [ ] **Korak 4:** implementiraj `domain.py` (Pydantic `model_validator(mode="after")` za međusobne reference).
-- [ ] **Korak 5:** `uv run pytest tests/test_domain.py -q` → PASS.
-- [ ] **Korak 6:** dodaj `.github/workflows/ci.yml`: na svaki push i PR pokreće `astral-sh/setup-uv`, `uv sync` i `uv run pytest -q`. Commitovi `feat: domain models and default scenario` i `ci: run tests on push`; zatim `git push` i provjera da je CI zelen (`gh run list --limit 1`).
+- [x] **Korak 3:** `uv run pytest tests/test_domain.py -q` → očekuj FAIL (nema modula).
+- [x] **Korak 4:** implementiraj `domain.py` (Pydantic `model_validator(mode="after")` za međusobne reference).
+- [x] **Korak 5:** `uv run pytest tests/test_domain.py -q` → PASS.
+- [x] **Korak 6:** dodaj `.github/workflows/ci.yml`: na svaki push i PR pokreće `astral-sh/setup-uv`, `uv sync` i `uv run pytest -q`. Commitovi `feat: domain models and default scenario` i `ci: run tests on push`; zatim `git push` i provjera da je CI zelen (`gh run list --limit 1`).
 
 ### Zadatak 2: Udaljenost i vrijeme
 
