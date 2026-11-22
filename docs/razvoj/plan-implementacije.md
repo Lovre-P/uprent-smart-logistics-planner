@@ -154,8 +154,8 @@ Algoritam (DP nad stanjima, jer ga signatura ne određuje):
 # zadrži manji km za isto stanje; završno stanje: preuzeti == isporučeni -> km + dionica(lokacija, baza)
 ```
 
-- [ ] **Korak 1: Testovi:** `test_table_sizes` (A 32 podskupa, B 1024); `test_state_count` (A 281 + B 65.281 = 65.562, uključujući početno stanje u bazi; stanje = (preuzeti, isporučeni, lokacija zadnje radnje)); `test_b_all_km` (B, svih 10 → 1822); `test_a_n03_km` (A, {N03} → 372); `test_b_without_n03_km` (1629); `test_empty_subset_zero` (∅ → 0 km); `test_shared_table_same_type` (dva kamiona istog tipa → isti objekt tablice); `test_state_cap_raises` (kamion s 12 mjesta i 12 naloga od 800 kg, `max_states=10_000` → `StateLimitExceeded`).
-- [ ] **Korak 2–5:** FAIL → implementacija (kamioni istog `(capacity_kg, slots)` dijele tablicu) → PASS → commit `feat: exact per-truck tables`.
+- [x] **Korak 1: Testovi:** `test_table_sizes` (A 32 podskupa, B 1024); `test_state_count` (A 281 + B 65.281 = 65.562, uključujući početno stanje u bazi; stanje = (preuzeti, isporučeni, lokacija zadnje radnje)); `test_b_all_km` (B, svih 10 → 1822); `test_a_n03_km` (A, {N03} → 372); `test_b_without_n03_km` (1629); `test_empty_subset_zero` (∅ → 0 km); `test_shared_table_same_type` (dva kamiona istog tipa → isti objekt tablice); `test_state_cap_raises` (kamion s 12 mjesta i 12 naloga od 800 kg, `max_states=10_000` → `StateLimitExceeded`).
+- [x] **Korak 2–5:** FAIL → implementacija (kamioni istog `(capacity_kg, slots)` dijele tablicu) → PASS → commit `feat: exact per-truck tables`.
 
 ### Zadatak 6: Egzaktni solver – kombiniranje i postavke
 

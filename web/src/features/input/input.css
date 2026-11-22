@@ -1,0 +1,23 @@
+.input-tables { min-width:0; }
+.data-actions, .data-section-heading, .row-actions, .row-editor-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; }
+.data-actions { margin:.85rem 0 1.1rem; }
+.data-actions button,.data-section-heading button,.row-editor-actions button,.row-actions button { display:inline-flex; align-items:center; gap:.35rem; font-size:.82rem; font-weight:600; padding:.38rem .65rem; border:1px solid var(--line); border-radius:.3rem; background:var(--paper); color:var(--ink); }
+.data-actions button:hover,.data-section-heading button:hover,.row-actions button:hover,.row-editor-actions button:hover { border-color:var(--brand); color:var(--brand); }
+.data-section { padding:1rem; margin:.8rem 0; border:1px solid var(--line); border-radius:.45rem; background:var(--paper); }
+.data-section-heading { justify-content:space-between; margin-bottom:.6rem; }
+.data-section-heading h3 { font-size:1.08rem; font-weight:700; }
+.data-scroll { max-width:100%; overflow-x:auto; }
+.data-scroll table { border-collapse:collapse; width:100%; font-size:.83rem; text-align:left; }
+.data-scroll thead { background:#f0f3ec; color:#40504a; }
+.data-scroll th,.data-scroll td { padding:.36rem .45rem; border-bottom:1px solid #e5e8e1; white-space:nowrap; }
+.data-scroll tr:last-child td,.data-scroll tr:last-child th { border-bottom:0; }
+.data-scroll thead th { font-weight:600; font-size:.76rem; }
+.row-actions { flex-wrap:nowrap; justify-content:flex-end; gap:.15rem; }
+.row-actions button { padding:.35rem; border-color:transparent; color:var(--muted); }
+.row-editor { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(8rem,100%),1fr)); align-items:start; gap:.65rem; padding:.7rem; background:#eef3ec; border-radius:.3rem; white-space:normal; }
+.row-editor label { display:block; font-size:.78rem; font-weight:600; margin:0 0 .2rem; }
+.row-editor-actions { grid-column:1/-1; }
+.row-editor-actions .solid-button { color:#fff; border-color:var(--brand); background:var(--brand); }
+.row-editor-actions .solid-button:hover { color:#fff; background:#0e3932; }
+.focused-order { background:#fff1ce; }.empty-table{ color:var(--muted); font-size:.85rem; padding:.6rem; }
+@media (max-width:600px) { .data-section {padding:.65rem;} }
