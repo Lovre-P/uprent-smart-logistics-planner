@@ -18,7 +18,7 @@ Kandidat je odabrao da se devet sati po zadanom odnosi na vožnju. Učinak te od
 | ChatGPT | Predložio je početni pristup s OR-Toolsom i Streamlitom te prvo tumačenje poslovnih pravila. |
 | Gemini 4 Hydrogen | Predložio je FastAPI i React, zatim neovisno pregledao specifikaciju i izdvojio pogreške u modelu i načinu provjere. |
 | Codex (GPT 6.2 Astra) | Provjerio je zahtjeve, sastavio primjer s pogrešnim izostavljanjem naloga i implementirao planer uz testove. Zasebni agenti pregledali su implementaciju jezgre. |
-| Claude Code (Opus 5.5) | Usporedio je tri predložena pristupa i egzaktnim izračunom potvrdio 182,2 km i 200,1 km. Napisao je specifikaciju, plan implementacije, QA plan i referentni solver. Nakon QA-a neovisno je pregledao kod i sučelje te aplikaciju usporedio s iscrpnom pretragom na 400 slučajnih scenarija. [Neovisni pregled](razvoj/neovisni-pregled.md) |
+| Claude Code (Opus 5.5) | Usporedio je tri predložena pristupa i egzaktnim izračunom potvrdio 182,2 km i 200,1 km. Napisao je specifikaciju, plan implementacije, QA plan i referentni solver. Nakon QA-a neovisno je pregledao kod i sučelje. Aplikaciju je usporedio s referentnim solverom na 100 slučajnih scenarija i s iscrpnom pretragom na još 300. [Neovisni pregled](razvoj/neovisni-pregled.md) |
 
 ## Što su provjere otkrile
 

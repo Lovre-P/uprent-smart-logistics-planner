@@ -153,7 +153,7 @@ Svi zabilježeni odgovori API-ja tijekom javne provjere imali su status HTTP 200
 
 Ispravci su neovisno provjereni:
 
-- CI je zelen za sve commitove ispravaka, a lokalni HEAD jednak je privatnom `origin/main`.
+- CI se pokreće po pushu i zelen je za svaki push s ispravcima (`ce461d6`, `fb304b7`, `3408d82` i `7d2834c`). Lokalni HEAD jednak je `origin/main`.
 - Tekstovi analize pišu „217,0 km”, „17,9 km” i „182,2 km”. Glavni rezultati su nepromijenjeni: 182,2, 200,1, 217,0 i 11,3 km.
 - Javni demo poslužuje zadnju izgradnju (`index-0znNggvP.js`). Sve kilometraže na Planu i u Analizi imaju jednu decimalu. Točka krivulje prikazuje traku s prikvačenim nalozima i oznaku „Optimalno uz prikvačene naloge”. „Vrati optimalni plan” vraća 182,2 km i „Dokazano optimalno”. Uputa uz brzinu otvara se s točnim tekstom.
 
