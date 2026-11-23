@@ -16,6 +16,23 @@ function setup(initial: Scenario = structuredClone(data) as Scenario) {
   return changed
 }
 
+it.each(['Uredi A', 'Dodaj kamion'])('%s prikazuje uputu uz brzinu kamiona', async (action) => {
+  const changed = setup()
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', {name: action}))
+  const form = within(screen.getByRole('form', {name: 'Uređivanje: Kamioni'}))
+  const speed = form.getByRole('textbox', {name: 'Brzina (km/h)'})
+  expect((speed as HTMLInputElement).value).toBe('60')
+  const help = form.getByRole('button', {name: 'Uputa: Brzina kamiona'})
+  await user.click(help)
+  const tip = screen.getByRole('tooltip')
+  expect(help.getAttribute('aria-describedby')).toBe(tip.id)
+  expect(tip.textContent).toContain('Zadatak zadaje prosječnu brzinu od 60 km/h za oba kamiona. Brzina određuje trajanje vožnje.')
+  await user.keyboard('{Escape}')
+  expect(screen.queryByRole('tooltip')).toBeNull()
+  expect(changed).not.toHaveBeenCalled()
+})
+
 it('nepoznata lokacija daje grešku uz polje i zadržava zadnji valjani scenarij', async () => {
   const changed = setup()
   const user = userEvent.setup()

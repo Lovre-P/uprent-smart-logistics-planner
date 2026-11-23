@@ -1,6 +1,7 @@
 import { Fragment, useId, useRef, useState } from 'react'
 import { Download, FileUp, Pencil, Plus, RotateCcw, Trash2 } from 'lucide-react'
 import { api } from '../../api'
+import { Hint } from '../../components/Hint'
 import { InfoLine } from '../../components/InfoLine'
 import { hints } from '../../content/hints'
 import { parseHrNumber } from '../../lib/parseNumber'
@@ -152,7 +153,11 @@ export function InputTables({scenario, onChange, onReset, focusOrder}: Props) {
       {groups[group].columns.map(col => {
         const fieldId = uid+'-field-'+col.key
         const fieldError = notice?.group === group && notice.field === col.key ? notice.message : null
-        return <div key={col.key}><label htmlFor={fieldId}>{col.title}</label>
+        return <div key={col.key}>
+          <div className="row-editor-label">
+            <label htmlFor={fieldId}>{col.title}</label>
+            {col.key === 'speed_kmh' && <Hint id="speed_kmh" />}
+          </div>
           <input id={fieldId} autoFocus={col.key==='id'} value={fields[col.key]}
             inputMode={col.type === 'number'?'decimal':undefined} list={col.list?uid+'-choices-'+col.list:undefined}
             aria-invalid={!!fieldError} aria-describedby={fieldError ? fieldId+'-error' : undefined}

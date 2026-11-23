@@ -15,7 +15,9 @@
 .row-actions { flex-wrap:nowrap; justify-content:flex-end; gap:.15rem; }
 .row-actions button { padding:.35rem; border-color:transparent; color:var(--muted); }
 .row-editor { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(8rem,100%),1fr)); align-items:start; gap:.65rem; padding:.7rem; background:#eef3ec; border-radius:.3rem; white-space:normal; }
-.row-editor label { display:block; font-size:.78rem; font-weight:600; margin:0 0 .2rem; }
+.row-editor-label { display:flex; align-items:center; gap:.15rem; margin-bottom:.2rem; }
+.row-editor:has(.hint-trigger) .row-editor-label { min-height:1.6rem; }
+.row-editor label { font-size:.78rem; font-weight:600; }
 .row-editor-actions { grid-column:1/-1; }
 .row-editor-actions .solid-button { color:#fff; border-color:var(--brand); background:var(--brand); }
 .row-editor-actions .solid-button:hover { color:#fff; background:#0e3932; }

@@ -25,7 +25,7 @@ export const hints = {
     exact_max_orders: { title: 'Prag broja naloga', body: 'Automatski odabir zadano koristi egzaktni solver do 12 naloga. Iznad praga koristi OR-Tools.' },
     exact_max_trucks: { title: 'Prag broja kamiona', body: 'Automatski odabir zadano koristi egzaktni solver za najviše 3 kamiona. Za veću flotu koristi OR-Tools.' },
     pinned_orders: { title: 'Prikvačeni nalozi', body: 'Na početku su svi nalozi slobodni. U Analizi nalog možete dodijeliti određenom kamionu i izračunati kako se mijenja plan.' },
-    speed_kmh: { title: 'Brzina kamiona', body: 'Zadana brzina je 60 km/h, pa svaki kilometar traje jednu minutu. Brzina pojedinog kamiona podešava se u ulaznim podacima.' },
+    speed_kmh: { title: 'Brzina kamiona', body: 'Zadatak zadaje prosječnu brzinu od 60 km/h za oba kamiona. Brzina određuje trajanje vožnje.' },
   } satisfies Record<keyof Settings | 'speed_kmh', HintText>,
   tabs: {
     plan: 'Pregledajte rutu svakog kamiona, vrijeme vožnje i teret nakon svake radnje.',
