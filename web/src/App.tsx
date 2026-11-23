@@ -99,6 +99,11 @@ export default function App() {
   const busy=computing || !!error
   const usable=result && hasUsablePlan(result)
   const status=result && (result.validation.passed?result.status:'INVALID_PLAN')
+  const pins = Object.entries((resultScenario ?? scenario)?.settings.pinned_orders ?? {})
+    .sort(([a], [b]) => a.localeCompare(b, 'hr', { numeric: true }))
+    .map(([order, truck]) => `${order} → ${truck}`).join(', ')
+  const pinnedOptimum = !!pins && !!usable && result.optimality === 'proven'
+    && (status === 'OPTIMAL' || status === 'OPTIMAL_PARTIAL')
   function choose(id:Tab) {setFocusOrder(null);setTab(id)}
   function switchToPlan(patch:Partial<Settings>) {setup.applySettings(patch);choose('plan')}
   function reset(){setup.resetToTask();choose('plan')}
@@ -160,7 +165,7 @@ export default function App() {
         </div>
         <div className="header-tools">
           {result&&status&&<span className="header-status">
-            {busy && <small>Prethodni plan</small>}<StatusBadge status={status} optimality={result.optimality}/>
+            {busy && <small>Prethodni plan</small>}<StatusBadge status={status} optimality={result.optimality} pinnedOptimum={pinnedOptimum}/>
           </span>}
           <button className="solve-button" type="button" onClick={()=>solve.recalculate()} disabled={!scenario||computing}>
             <Route size={17} aria-hidden="true"/>Izračunaj plan</button>
@@ -187,6 +192,15 @@ export default function App() {
           {tabs.map(({id})=><section key={id} hidden={id!==tab} id={'panel-'+id} role="tabpanel" aria-labelledby={'tab-'+id} tabIndex={0}>
             {id===tab && <>
               <div className="view-heading"><h2>{active.heading}</h2></div>
+              {pins && (id === 'plan' || id === 'analysis') &&
+                <section className="pinned-plan" aria-label={hints.pinnedPlan.label}>
+                  <Callout>
+                    <p>{usable ? hints.pinnedPlan.description(pins) : hints.pinnedPlan.constraints(pins)}
+                      {pinnedOptimum && ' ' + hints.pinnedPlan.proof}</p>
+                    <button type="button" className="analysis-action" disabled={computing}
+                      onClick={() => switchToPlan({pinned_orders: {}})}>{hints.pinnedPlan.restore}</button>
+                  </Callout>
+                </section>}
               {id!=='plan'&&computing&&<p className="view-working" role="status">Računam…{result && ' Prikazan je prethodni plan.'}</p>}
               {id!=='plan'&&error&&<Callout tone="error">{error}{result && ' Prikazan je posljednji uspješan izračun.'}</Callout>}
               {panel()}

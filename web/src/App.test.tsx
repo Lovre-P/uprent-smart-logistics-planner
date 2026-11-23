@@ -88,3 +88,14 @@ it('pala provjera sprječava prikaz rute i na kartici Karta',async()=>{
   expect(within(panel).getByRole('alert').textContent).toContain('Plan nije valjan')
   expect(within(panel).queryByTestId('loc-L0')).toBeNull()
 })
+
+it('uz OR-Tools navodi prikvačene naloge i zadržava status najboljeg pronađenog plana', async () => {
+  const settings = {...scenario.settings, pinned_orders: {N03: 'A'}, solver: 'ortools' as const}
+  vi.mocked(api.defaultScenario).mockResolvedValue({...scenario, settings})
+  vi.mocked(api.solve).mockResolvedValue({...normal, settings, solver: 'ortools', status: 'FEASIBLE', optimality: 'best_found'} as SolveResult)
+  render(<App/>)
+  const strip = await screen.findByRole('region', {name: 'Prikvačeni nalozi'})
+  await waitFor(() => expect(screen.getByRole('banner').textContent).toContain('Najbolje pronađeno'))
+  expect(strip.textContent).toContain('N03 → A')
+  expect(strip.textContent).not.toContain('Optimalan je')
+})

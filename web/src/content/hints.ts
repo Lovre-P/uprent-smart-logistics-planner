@@ -2,6 +2,14 @@ import type { PlanStatus, Settings } from '../types'
 
 export interface HintText { title: string; body: string }
 export const hints = {
+  pinnedPlan: {
+    label: 'Prikvačeni nalozi',
+    description: (assignments: string) => `Prikazan je raspored uz prikvačene naloge (${assignments}).`,
+    constraints: (assignments: string) => `Prikvačeni nalozi: ${assignments}.`,
+    proof: 'Optimalan je uz ta prikvačivanja.',
+    status: 'Optimalno uz prikvačene naloge',
+    restore: 'Vrati optimalni plan',
+  },
   settings: {
     day_limit_min: { title: 'Dnevni limit vozača', body: 'Zadatak predviđa 9 h vožnje po vozaču. B za sve naloge treba 3 h 02 min vožnje. Kraći limit može promijeniti raspodjelu naloga.' },
     limit_includes_handling: { title: 'U 9 h ulazi i utovar/istovar', body: 'Zadatak kaže da vozač može voziti 9 h. Zadano u limit ulazi samo vožnja. B sam prijeđe 182,2 km, a s radnjama radi 9 h 42 min. Uključite ovu postavku i ukupna ruta iznosi 200,1 km. A tada preuzima N03.' },

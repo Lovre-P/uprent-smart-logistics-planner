@@ -67,6 +67,23 @@ test('heavy order warning', async ({ page }) => {
   await expect(warnings).toContainText('M11 teži 12.000 kg')
 })
 
+test('prikvačeni raspored s krivulje ima objašnjenje i povratak na optimum', async ({ page }) => {
+  await page.goto('/')
+  await expect(summary(page)).toContainText('182,2 km')
+  await page.getByRole('tab', { name: 'Analiza' }).click()
+  await page.getByRole('button', { name: 'Prikaži raspored: 284,2 km, 344,8 min' }).click()
+  await expect(summary(page)).toContainText('284,2 km')
+  const banner = page.getByRole('region', { name: 'Prikvačeni nalozi' })
+  await expect(banner).toContainText(/Prikazan je raspored uz prikvačene naloge \(.*N03 → A.*\)\. Optimalan je uz ta prikvačivanja\./)
+  await expect(page.getByRole('banner')).toContainText('Optimalno uz prikvačene naloge')
+  await page.getByRole('tab', { name: 'Analiza' }).click()
+  await expect(banner).toContainText('N03 → A')
+  await banner.getByRole('button', { name: 'Vrati optimalni plan' }).click()
+  await expect(summary(page)).toContainText('182,2 km')
+  await expect(banner).toHaveCount(0)
+  await expect(page.getByRole('banner')).toContainText('Dokazano optimalno')
+})
+
 test('hint explains limit', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: 'Uputa: U 9 h ulazi i utovar/istovar' }).click()

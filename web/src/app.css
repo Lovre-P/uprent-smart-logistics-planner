@@ -56,3 +56,5 @@ body { min-width:0; }
   .view-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.1rem;}
   .view-tabs button svg{display:none;}.view-tabs button{padding:.45rem .25rem;justify-content:center;}
 }
+.pinned-plan { margin: .75rem 0; overflow-wrap: anywhere; }
+.pinned-plan button { margin-top: .45rem; }
