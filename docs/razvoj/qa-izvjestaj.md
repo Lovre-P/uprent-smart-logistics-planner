@@ -2,7 +2,7 @@
 
 Snimke zaslona i izlazi provjera nalaze se u lokalnoj mapi `qa/out/`, koja nije u repozitoriju.
 
-22.–23. studenoga 2026. (Europe/Zagreb) · Codex · Windows, uv 0.11.25, Python 3.11.9, Node v24.13.1. Prvi prolaz `2955b9d`. Provjerena završna revizija `a68165c`.
+22.–23. studenoga 2026. (Europe/Zagreb) · Codex · Windows, uv 0.11.25, Python 3.11.9, Node v24.13.1. Prvi prolaz `2955b9d`. Završna provjerena revizija s dokumentacijom za predaju je `9bd2594`. Javni demo koristi izgradnju aplikacije iz `3408d82`.
 
 ## Sažetak
 
@@ -10,9 +10,11 @@ Prvi prolaz (120 provjera) · PASS **116** · FAIL **3** · BLOCKED **1**.
 
 Ponovljeni prolaz (120 provjera) · PASS **117** · FAIL **2** · BLOCKED **1**.
 
+Ciljane provjere nakon ispravaka zatvorile su preostale tri stavke. Na javnom demou QA-7.4 potvrdio je **217,0 km** uz strogi limit i po 21 min za utovar i istovar. QA-8.1 potvrdio je upute uz postavke i brzinu kamiona. Nakon unosa sati QA-14.10 potvrdio je svih sedam stavki predaje. Prema posljednjem ishodu za svaki od 120 redaka, **120 PASS, 0 FAIL, 0 BLOCKED**.
+
 Prvi izvještaj pohranjen je u commitu `0abe52e`. Cijeli drugi prolaz izvršen je u novom klonu `../uprent-qa2` preuzetom s privatnog GitHuba nakon ispravka. Za QA-12.1 u klon je lokalno kopiran ignorirani izvornik. Prije QA-13 javni demo ponovno je objavljen iz glavne mape projekta.
 
-**Konačna ocjena: NIJE SPREMNO za cjelovitu predaju.** Referentna kilometraža i javni demo potvrđeni su. Kandidat treba upisati stvarnu procjenu sati. Tablica u nastavku razlikuje tu stavku predaje od tehničkih rezultata.
+**Konačna ocjena: SPREMNO za predaju.** Svih sedam testova poslovnih ograničenja navedenih u README-u je prošlo. Kandidat je za osam faza rada procijenio ukupno **6 h 23 min**. Dodatne provjere optimizacijske logike i sučelja opisane su u [neovisnom pregledu](neovisni-pregled.md).
 
 ## Rezultati
 
@@ -138,7 +140,7 @@ Kontrolne točke izvršene su po skupinama QA-0–QA-14. Naredbe, ulazi, koraci 
 | 14.7 | PASS | PASS | 5.7 km po kamionu i ukupno — 6.2, 7.1 |
 | 14.8 | PASS | PASS | 5.8 upozorenja — 3.8, 3.12, 7.5, 7.6 |
 | 14.9 | PASS | PASS | 6 prikaz po kamionu — 7.1, 21 korak s teretom, radnjom i lokacijom |
-| 14.10 | BLOCKED | BLOCKED | 8 predaja — 9.1–9.6, 13.3; sedam odredišta postoji, nedostaje kandidatov broj sati. |
+| 14.10 | BLOCKED | PASS | Završna provjera točke 8 zadatka na `9bd2594` pokriva 7/7 stavki iz §16 specifikacije. Izvorni kod u Gitu, upute u README-u i `docs/upute.md`, javni demo (stranica i `/api/health` HTTP 200, izgradnja `index-0znNggvP.js`), logika u `docs/LOGIKA.md`, poslovna ograničenja (7/7 iz README-a, ukupno 22/22 u validatoru), osvrt u `docs/AI_ALATI.md` i vrijeme u `docs/VRIJEME.md` (383 min). [Izlaz testova](../../qa/out/np/predaja-validator.txt) |
 | 14.11 | PASS | PASS | Vrijeme, brzina i baza — 3.2, 3.4, 5.2, 6.2 |
 
 ### Pokrivenost 16 skupina iz QA-2.4
@@ -198,8 +200,10 @@ Broje se klikovi na gumbe i kartice. Unos u polje broji se zasebno. Zadaci o nek
 |---|---|---|---|
 | UPR-Q01 | `a68165c` (izvorni kod, postojeći regresijski test i izgrađeno sučelje) | QA-0 do QA-14, izravno 7.6, 8.10 i 13.3 | PASS za ispravak. Bez slobodnog stroja korisnik odmah vidi što treba učiniti. Nakon dodavanja novog stroja N11 se sprema. |
 | UPR-Q03 | Odluka vlasnika za drugi prolaz, bez promjene aplikacije | 8.6 | PASS prema prihvaćenom odobrenju teksta. Prvi ishod ostaje zabilježen. |
-| UPR-Q02, UPR-Q04, UPR-Q06 | Manji nalazi, bez commita ispravka | 7.4, 2.4, 8.1 | Kilometraža je točna. Uz cijeli broj nedostaje završna decimala. Brzina ima jedinicu, ali nema ⓘ. Specifikacija ima više skupina od broja koji navodi QA plan. |
-| UPR-Q05 | Potrebna je stvarna procjena kandidata | 9.5, 9.6, 14.10 | Predložak zadovoljava QA-9.5. Za samu predaju nedostaju sati. |
+| UPR-Q02 | Ispravljeno u `89dfb7c` | 7.4 | PASS. Na javnom demou potvrđen je prikaz 217,0 km s jednom decimalom. |
+| UPR-Q04 | Napomena o QA planu | 2.4 | PASS. QA plan traži 16 skupina, a §15 specifikacije numerira 27. Svih 16 traženih skupina mapirano je na testove. |
+| UPR-Q05 | Riješeno unosom sati u `728b30c` | 14.10 (sljedivost 9.5 i 9.6) | PASS. Zbroj osam faza odgovara kandidatovoj procjeni od 6 h 23 min. |
+| UPR-Q06 | Ispravljeno u `3408d82` | 8.1 | PASS. Na javnom demou uz polje „Brzina (km/h)” otvorena je uputa o zadanoj brzini od 60 km/h i trajanju vožnje. |
 
 U ponovljenom QA-8.10 izračun je tražio 0/1 klik, drugo tumačenje 1, dodavanje naloga 6 do spremanja te 1 na Plan za potvrdu. Slijed za dodavanje bio je Ulazni podaci → Dodaj nalog → Dodaj stroj → Spremi stroj → Dodaj nalog → Spremi nalog, uz zaseban unos mase od 800 kg. Zašto A ne vozi pronađeno je jednim klikom, a N04 na A prikazan je u dva. Za prvi klik na „Dodaj nalog” sada postoji jasno objašnjenje preduvjeta. Korisnik i dalje mora prijeći iz tablice naloga do tablice strojeva.
 
