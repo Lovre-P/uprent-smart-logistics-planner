@@ -2,12 +2,23 @@
 
 Kandidat je odabrao da se devet sati po zadanom odnosi na vožnju. Učinak te odluke može se provjeriti na istim nalozima. Kad se u limit uključe i utovar i istovar, A preuzima nalog N03, a ukupna kilometraža raste za 17,9 km.
 
+## Tijek rada
+
+1. Kratko informiranje o problemu u ChatGPT-u.
+2. Kandidat je napisao pretpostavke i pravila koja smatra obveznima. S Claude Codeom (Opus 5.5) ih je provjerio i kritički pregledao, a zatim izradio specifikaciju, plan implementacije, QA plan i promptove za provjeru.
+3. Gemini 4 Hydrogen u Google AI Studiju pregledao je specifikaciju i pretpostavke izvan izvornog konteksta, u najviše četiri kruga.
+4. Codex (GPT 6.2 Astra, xhigh, sa subagentima) implementirao je plan kao ograničeno autonoman zadatak. Smjernice su određivale što mora pročitati prije početka i kada mora stati i tražiti odobrenje.
+5. Nakon kandidatove ručne provjere QA je izveden u novom Codexovu razgovoru, uz automatizirane testove i provjeru u ugrađenom pregledniku.
+6. Završnu provjeru napravili su Claude Code i Gemini. Kandidat je nalaze objedinio u Claude Codeu i dao ih Codexu na ispravak.
+
+## Uloga svakog alata
+
 | Alat | Uloga u radu |
 |---|---|
 | ChatGPT | Predložio je početni pristup s OR-Toolsom i Streamlitom te prvo tumačenje poslovnih pravila. |
-| Gemini | Predložio je FastAPI i React, zatim neovisno pregledao specifikaciju i izdvojio pogreške u modelu i načinu provjere. |
-| Codex | Provjerio je zahtjeve, sastavio primjer s pogrešnim izostavljanjem naloga i implementirao planer uz testove. Zasebni agenti pregledali su implementaciju jezgre. |
-| Claude | Usporedio je tri predložena pristupa i egzaktnim izračunom potvrdio 182,2 km i 200,1 km. Napisao je specifikaciju, plan implementacije, QA plan i referentni solver. Nakon QA-a neovisno je pregledao kod i sučelje te aplikaciju usporedio s iscrpnom pretragom na 400 slučajnih scenarija. [Neovisni pregled](razvoj/neovisni-pregled.md) |
+| Gemini 4 Hydrogen | Predložio je FastAPI i React, zatim neovisno pregledao specifikaciju i izdvojio pogreške u modelu i načinu provjere. |
+| Codex (GPT 6.2 Astra) | Provjerio je zahtjeve, sastavio primjer s pogrešnim izostavljanjem naloga i implementirao planer uz testove. Zasebni agenti pregledali su implementaciju jezgre. |
+| Claude Code (Opus 5.5) | Usporedio je tri predložena pristupa i egzaktnim izračunom potvrdio 182,2 km i 200,1 km. Napisao je specifikaciju, plan implementacije, QA plan i referentni solver. Nakon QA-a neovisno je pregledao kod i sučelje te aplikaciju usporedio s iscrpnom pretragom na 400 slučajnih scenarija. [Neovisni pregled](razvoj/neovisni-pregled.md) |
 
 ## Što su provjere otkrile
 
