@@ -140,3 +140,31 @@ Usporedba s referentnim solverom pokreće se naredbom `uv run python qa/oracle/c
 | U Analizi kliknuti „Vrati optimalni plan” | PASS · Plan ponovno prikazuje **182,2 km** i „Dokazano optimalno”. Traka je nestala. | `np-06-povratak.jpg` |
 
 Svi zabilježeni odgovori API-ja tijekom javne provjere imali su status HTTP 200. Konzola nije zabilježila upozorenja ni pogreške. Očitane dionice, tekst trake, završni status i mrežni odzivi spremljeni su u `qa/out/screens/np-javna-provjera.json`.
+
+## Završna provjera prije predaje
+
+23. studenoga 2026. · Claude · provjerene revizije `fb304b7` i `7d2834c`.
+
+| Nalaz | Stanje |
+|---|---|
+| NP-08 | Ispravljen u `3408d82`. Uz „Brzina (km/h)” u obrascu kamiona postoji uputa ⓘ, a test pokriva uređivanje i dodavanje kamiona. |
+| NP-01 | Riješen. Procjena sati upisana je u [VRIJEME.md](../VRIJEME.md). |
+| NP-06, NP-07, NP-09, NP-10 | Nisu mijenjani, kako je predloženo. |
+
+Ispravci su neovisno provjereni:
+
+- CI je zelen za sve commitove ispravaka, a lokalni HEAD jednak je privatnom `origin/main`.
+- Tekstovi analize pišu „217,0 km”, „17,9 km” i „182,2 km”. Glavni rezultati su nepromijenjeni: 182,2, 200,1, 217,0 i 11,3 km.
+- Javni demo poslužuje zadnju izgradnju (`index-0znNggvP.js`). Sve kilometraže na Planu i u Analizi imaju jednu decimalu. Točka krivulje prikazuje traku s prikvačenim nalozima i oznaku „Optimalno uz prikvačene naloge”. „Vrati optimalni plan” vraća 182,2 km i „Dokazano optimalno”. Uputa uz brzinu otvara se s točnim tekstom.
+
+Dvije sitnice ostaju bez ispravka:
+
+- Točke krivulje 235,1 i 235,3 km udaljene su oko 4,5 px, pa klik mišem odabere gornju. Tipkovnicom se dobije točno 235,1 km, a oblačić pri prelasku mišem pokazuje koja će se točka odabrati.
+- Kod djelomičnog plana s prikvačenim nalozima oznaka statusa ne kaže „djelomičan”. Boja i broj izvršenih naloga to i dalje pokazuju.
+
+Prije objave repozitorija provjereno je:
+
+- u indeksu nema teksta zadatka, lokalnih bilješki, datoteka `.env` ni mape `qa/out/`;
+- u cijeloj povijesti nema ID-a Cloudflare računa, tokena, ključeva ni e-mail adresa u datotekama;
+- nijedna dulja rečenica iz teksta zadatka nije doslovno prenesena;
+- relativne poveznice vode na postojeće datoteke, osim poveznica na lokalne QA dokaze. Ti dokazi ostaju izvan repozitorija jer sadrže zapise objave i lokalne putanje.
