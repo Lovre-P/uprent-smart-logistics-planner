@@ -58,7 +58,7 @@ npm run e2e
 
 ## Kako radi (ukratko)
 
-- **Egzaktni solver** dinamičkim programiranjem dokazuje optimum. Automatski se bira za najviše 12 naloga koji prođu predprovjeru i najviše tri kamiona.
+- **Egzaktni solver** dinamičkim programiranjem dokazuje optimum. Automatski se bira za scenarije do 12 naloga i 3 kamiona.
 - **OR-Tools** traži najbolji plan u zadanom vremenu. Preuzima veće ulaze i izračune u kojima egzaktni solver dosegne sigurnosnu granicu broja stanja ili vremena.
 - **Neovisni validator** ponovno simulira svaki plan radnju po radnju i daje sve brojke koje se prikazuju. Plan koji ne prođe validator nikad se ne prikazuje kao valjan.
 

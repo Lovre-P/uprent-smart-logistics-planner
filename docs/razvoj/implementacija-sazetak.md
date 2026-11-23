@@ -7,7 +7,7 @@ Isti izračun dostupan je u web-aplikaciji, kroz naredbeni redak i HTTP API. Na 
 ## Odluke i ograničenja
 
 - Predprovjera prema v4.2 računa najkraće putove preko zaokruženih dionica. Regresijski primjer potvrđuje donju granicu od 11,2 km za N01 i izvediv potpuni plan od 11,3 km.
-- Egzaktni solver ima zadane pragove od 12 naloga nakon predprovjere i tri kamiona te zaštite od milijun stanja i osam sekundi. Za veće ulaze i nakon prekida radi OR-Tools. Njegov rezultat nosi oznaku „Najbolje pronađeno”. Analize koje trebaju iscrpnu pretragu imaju zasebnu zaštitu i navode što je bilo moguće izračunati.
+- Egzaktni solver automatski se bira za scenarije do 12 naloga i 3 kamiona. Pretraga ima zaštite od milijun stanja i osam sekundi. Za veće ulaze i nakon prekida radi OR-Tools. Njegov rezultat nosi oznaku „Najbolje pronađeno”. Analize koje trebaju iscrpnu pretragu imaju zasebnu zaštitu i navode što je bilo moguće izračunati.
 - Pythonovo sučelje OR-Toolsa 9.15 odbija listu kamiona u metodi `SetAllowedVehiclesForIndex`. Dopušteni kamion i mogućnost izostavljanja naloga zadani su kroz `VehicleVar`. [Odluke i provjere](odstupanja.md)
 - Lokacije su simulirane koordinate u kilometrima. Plan koristi euklidske dionice i vremena unesena u scenarij. Promijenjeni scenarij može se spremiti izvozom JSON-a.
 

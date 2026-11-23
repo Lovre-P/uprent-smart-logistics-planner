@@ -43,7 +43,7 @@ Zadane vrijednosti su najočitije, doslovno tumačenje teksta zadatka.
 | Svaki kamion mora voziti | isključeno | Uključeno: svaki kamion dobiva barem jedan nalog kad je to moguće (na podacima iz zadatka 200,1 km). |
 | Djelomičan plan | uključeno | Ako sve naloge nije moguće izvršiti, izvrši se najviše što se može, a ostali dobiju upozorenje s razlogom. |
 | Cilj | najmanje km | Druga mogućnost: najraniji završetak posljednjeg kamiona (na podacima iz zadatka 284,2 km, svi gotovi za 5 h 45 min). |
-| Napredno: solver, vrijeme pretrage, usporedba s OR-Toolsom, početak smjene | auto, 3 s, da, 07:00 | Auto bira egzaktni solver do 12 naloga koji prođu predprovjeru i 3 kamiona. Veće ulaze preuzima OR-Tools, kao i izračune koji dosegnu granicu vremena ili broja stanja. Početak smjene služi samo za satnicu. |
+| Napredno: solver, vrijeme pretrage, usporedba s OR-Toolsom, početak smjene | auto, 3 s, da, 07:00 | Auto bira egzaktni solver za scenarije do 12 naloga i 3 kamiona. Veće ulaze preuzima OR-Tools, kao i izračune koji dosegnu granicu vremena ili broja stanja. Početak smjene služi samo za satnicu. |
 
 Brzina kamiona (60 km/h) zadaje se po kamionu u kartici Ulazni podaci.
 
