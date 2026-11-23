@@ -47,6 +47,22 @@ uv run uprent compare data/default_scenario.json
 uv run pytest
 ```
 
+Poslovna ograničenja provjerava neovisni validator na konkretnim rutama. Primjeri iz `tests/test_validator.py`:
+
+| Test | Pravilo |
+|---|---|
+| `test_capacity_l7_swap` | Nosivost u svakom trenutku: ako B na L7 utovari M10 prije istovara M06, teret naraste na 13.300 kg i plan nije valjan. |
+| `test_exact_capacity_allowed` | Teret od točno 10.000 kg je dopušten. |
+| `test_slots_exceeded` | Broj strojeva: četvrti stroj na kamionu s tri mjesta ruši plan. |
+| `test_b_alone_invalid_when_handling_counts` | Dnevni limit: kad u 9 h ulaze i utovar i istovar, B sam radi 582,2 min i plan nije valjan. |
+| `test_delivery_before_pickup` | Redoslijed: stroj se ne može istovariti prije utovara. |
+| `test_other_truck_delivers` | Isti kamion preuzima i isporučuje stroj. |
+| `test_machine_left_on_truck` | Kamion se vraća u bazu prazan. |
+
+```
+uv run pytest tests/test_validator.py -v
+```
+
 Za testove sučelja koristite Node 24. U mapi `web` pokrenite
 
 ```
