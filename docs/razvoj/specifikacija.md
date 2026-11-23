@@ -182,7 +182,7 @@ UpRent-zadatak/                  # korijen repozitorija
   cloudflare/        # Worker i konfiguracija za Cloudflare Containers
   docs/              # upute.md, LOGIKA.md, PRETPOSTAVKE.md, AI_ALATI.md, VRIJEME.md, razvoj/
   README.md
-  priprema/          # osobna priprema; u .gitignore
+  priprema/          # lokalne bilješke; u .gitignore
 ```
 
 ## 8. Format podataka, CLI i API
@@ -446,7 +446,7 @@ Vizualni detalji unutar pravila iz §13, točna imena internih funkcija koja nis
 | Sučelje kasni | jezgra, CLI i API gotovi i testirani prije sučelja |
 | OR-Tools na novijem Pythonu | `.python-version` = 3.11; Docker slika na 3.11 |
 | Cloudflare Containers u beta fazi ili nedostupan | ista Docker slika radi i na rezervnom hostu (§14) |
-| Kandidat ne zna objasniti dio sustava | `docs/LOGIKA.md` i osobni vodič u `priprema/` |
+| Dio sustava ostane neobjašnjen | `docs/LOGIKA.md`, `docs/upute.md` i upute ⓘ u sučelju |
 
 ## 19. Povijest izmjena
 

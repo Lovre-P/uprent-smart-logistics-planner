@@ -19,7 +19,7 @@ Egzaktni solver na podacima iz zadatka obradio je **65.562 stanja**. Tijekom še
 
 Referentni solver i aplikacija uspoređeni su na 30 slučajnih scenarija (sjemena 1000–1029). Egzaktni izračun dao je isti broj naloga i kilometražu u svih 30. Provjera obaju solvera završila je s **0 grešaka**.
 
-Brojevi testova i commit za svaki zadatak navedeni su u [dnevniku napretka](napredak.md). Obrazac za procjenu vlastitih sati čeka unos kandidata. [Vrijeme razvoja](../VRIJEME.md)
+Brojevi testova i commit za svaki zadatak navedeni su u [dnevniku napretka](napredak.md). Nakon QA-a i neovisnog pregleda prolaze 302 automatska testa. [Vrijeme razvoja](../VRIJEME.md)
 
 ## Objava
 
