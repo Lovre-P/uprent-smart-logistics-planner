@@ -12,7 +12,7 @@ export function TruckCard({ truck, depot, explanation }: {truck:TruckView; depot
   return <article className={'truck-card'+(!truck.used?' truck-card--idle':'')} aria-label={title}>
     <div className="truck-header">
       <span className="truck-symbol" style={{color:truckColor(truck.id)}}><Truck size={21} aria-hidden="true"/></span>
-      <h3>{title}</h3>{truck.used ? <span className="truck-km">{formatKm(truck.km)}</span> : <span>nije korišten · 0 km</span>}
+      <h3>{title}</h3>{truck.used ? <span className="truck-km">{formatKm(truck.km)}</span> : <span>nije korišten · {formatKm(truck.km)}</span>}
       {!truck.used && <button className="why-button" onClick={()=>setExpanded(v=>!v)} aria-expanded={expanded} type="button">
         Zašto?<ChevronDown size={14} aria-hidden="true"/></button>}
     </div>

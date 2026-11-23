@@ -25,6 +25,21 @@ test('apply alternative reading', async ({ page }) => {
   await applyHandlingLimit(page)
 })
 
+test('kilometraža dionice i cijelog plana ima jednu decimalu', async ({ page }) => {
+  await page.goto('/')
+  await expect(summary(page)).toContainText('182,2 km')
+  const steps = page.getByRole('table', { name: 'Koraci rute: Kamion B' })
+  const legCells = steps.locator('tbody tr td:nth-child(5)')
+  await expect.soft(legCells.filter({ hasText: /^17,0 km$/ }).first()).toBeVisible()
+  await applyHandlingLimit(page)
+  for (const name of ['Trajanje utovara', 'Trajanje istovara']) {
+    const duration = page.getByRole('textbox', { name, exact: true })
+    await duration.fill('21')
+    await duration.press('Enter')
+  }
+  await expect(summary(page).getByText('217,0 km', { exact: true })).toBeVisible()
+})
+
 test('heavy order warning', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('tab', { name: 'Ulazni podaci' }).click()

@@ -19,6 +19,10 @@ def _num(value) -> str:
     return f"{float(value):,.4f}".rstrip("0").rstrip(".").translate(str.maketrans(".,", ",."))
 
 
+def _km(value: float) -> str:
+    return f"{value:,.1f}".translate(str.maketrans(".,", ",."))
+
+
 def _duration(minutes: float) -> str:
     hours, mins = divmod(int(minutes + 0.5), 60)
     if not hours:
@@ -141,7 +145,7 @@ def _unused(s: Scenario, current: Assignment, analysis: Analysis, comparable: se
                 and s.settings.objective == "km" and extra is not None and extra > 0
                 and truck.id in comparable and not s.settings.pinned_orders):
             text = (f"{name} nije korišten: {used[0]} stigne sve sam, a svaki nalog prebačen "
-                    f"na {truck.id} dodao bi najmanje {_num(extra)} km.")
+                    f"na {truck.id} dodao bi najmanje {_km(extra)} km.")
         analysis.unused_trucks.append(UnusedTruck(truck=truck.id, message=text))
 
 
@@ -235,7 +239,7 @@ def _sensitivity(s: Scenario, ctx: ExactContext, current: Assignment, report: Va
         if other is not None:
             if _served(other) or settings.allow_partial:
                 sensitivity.next_plan_km = other.km_tenths / 10
-                sensitivity.note += f" Na {next_min} min izvršava se {_served(other)}/{len(s.orders)} naloga uz {_num(sensitivity.next_plan_km)} km."
+                sensitivity.note += f" Na {next_min} min izvršava se {_served(other)}/{len(s.orders)} naloga uz {_km(sensitivity.next_plan_km)} km."
             else:
                 sensitivity.note += f" Na {next_min} min potpuni plan više nije izvediv."
 
@@ -271,7 +275,7 @@ def analyze(scenario: Scenario, ctx: ExactContext | None, report: ValidationRepo
                 a.binding[:1] = _binding(scenario, report, unrestricted=True)
             else:
                 a.binding.append(f"Uz limit od {_num(threshold)} min dostupan je bolji plan "
-                                 f"od {_num(a.sensitivity.better_plan_km)} km.")
+                                 f"od {_km(a.sensitivity.better_plan_km)} km.")
     else:
         a.sensitivity.note = "Druga tumačenja i osjetljivost dostupni su na zahtjev."
     return a

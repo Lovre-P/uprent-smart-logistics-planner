@@ -33,7 +33,7 @@ export function CurveChart({points, currentKm, applySettings, busy, empty}: {
           <text x={left-9} y={y(end)+4} textAnchor="end">{numeric.format(end)}</text></g>
       })}
       <line className="curve-axis" x1={left} x2={right} y1={bottom} y2={bottom}/>
-      {[...new Set([minKm,maxKm])].map(km => <text key={km} x={x(km)} y={bottom+16} textAnchor="middle">{numeric.format(km)}</text>)}
+      {[...new Set([minKm,maxKm])].map(km => <text key={km} x={x(km)} y={bottom+16} textAnchor="middle">{formatKm(km)}</text>)}
       <text x={(left+right)/2} y="217" textAnchor="middle">Ukupna udaljenost (km)</text>
       <polyline className="curve-line" points={points.map(p => x(p.km)+','+y(p.end_min)).join(' ')}/>
       {points.map(point => {

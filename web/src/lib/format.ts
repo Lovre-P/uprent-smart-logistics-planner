@@ -1,5 +1,5 @@
 const integer = new Intl.NumberFormat('hr-HR', { useGrouping: 'always', maximumFractionDigits: 0 })
-const distance = new Intl.NumberFormat('hr-HR', { useGrouping: 'always', maximumFractionDigits: 1 })
+const distance = new Intl.NumberFormat('hr-HR', { useGrouping: 'always', minimumFractionDigits: 1, maximumFractionDigits: 1 })
 
 export function formatKm(km: number): string {
   return distance.format(km) + ' km'

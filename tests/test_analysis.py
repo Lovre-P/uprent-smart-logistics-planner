@@ -57,6 +57,7 @@ def test_sensitivity_strict(scenario):
     analysis = solve(apply_overrides(scenario, {"limit_includes_handling": True})).analysis
     s = analysis.sensitivity
     assert (s.handling_max_min, s.next_plan_km, s.limit_lower_min) == (20.95, 217, 522.9)
+    assert "uz 217,0 km" in s.note
     assert (s.better_plan_at_min, s.better_plan_km) == (582.2, 182.2)
     assert any("17,1" in text for text in analysis.binding)
 
