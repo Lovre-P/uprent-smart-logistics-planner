@@ -68,7 +68,7 @@ Kontrolne točke izvršene su po skupinama QA-0–QA-14. Naredbe, ulazi, koraci 
 | 7.1 | PASS | PASS | Prvi koraci, 182,2 km, Dokazano optimalno, A nije korišten, B 9 h 42 min, drugo tumačenje 200,1 km. [7.1](../../qa/out/screens/p2-7.1.jpg) |
 | 7.2 | PASS | PASS | Primijeni → 200,1 km, N03 na A, prekidač uključen. [7.2](../../qa/out/screens/p2-7.2.jpg) |
 | 7.3 | PASS | PASS | Povratak na početno pravilo i uključivanje svih kamiona → 200,1 km. [7.3](../../qa/out/screens/p2-7.3.jpg) |
-| 7.4 | FAIL | FAIL | Strogi limit i 21/21 min → na zaslonu `217 km`; plan traži `217,0 km`. [7.4](../../qa/out/screens/p2-7.4.jpg) |
+| 7.4 | FAIL | PASS | Ciljana provjera na javnom demou 23. 11. 2026. (`3408d82`). Uključen utovar i istovar u limit, oba trajanja 21 min. Plan prikazuje **217,0 km** i 10/10 naloga. Ispravljeno u `89dfb7c` nakon drugog prolaza (FAIL). [Snimka 7.4](../../qa/out/screens/np08-7.4.jpg) |
 | 7.5 | PASS | PASS | Limit 300 min uz 20/20 → 8/10, N08 i N09 imaju zasebna upozorenja „Dokazano”. [7.5](../../qa/out/screens/p2-7.5.jpg) |
 | 7.6 | PASS | PASS | M11 od 12.000 kg i N11 L1→L3 → 10/11, objašnjenje s najvećom nosivošću 10.000 kg. [7.6](../../qa/out/screens/p2-7.6.jpg) |
 | 7.7 | PASS | PASS | Uređivanje N01 → „N01: nepoznata lokacija L99.” Prethodni plan ostao je 10/11. [7.7](../../qa/out/screens/p2-7.7.jpg) [7.7-plan](../../qa/out/screens/p2-7.7-plan.jpg) |
@@ -81,7 +81,7 @@ Kontrolne točke izvršene su po skupinama QA-0–QA-14. Naredbe, ulazi, koraci 
 | 7.14 | PASS | PASS | Konzola lokalne kartice za pogreške i upozorenja: []. [Izlaz](../../qa/out/p2/7.14.txt). [7.14](../../qa/out/screens/p2-7.14.jpg) |
 | 7.15 | PASS | PASS | Mreža za QA-7: 34 solve zahtjeva uključujući usporedbe, 11 prekinutih. Neočekivani HTTP 4xx/5xx: []. L99 je zaustavljen uz polje prije slanja. [Mrežni događaji](../../qa/out/screens/p2-network.json). [7.15](../../qa/out/screens/p2-7.15.jpg) |
 | 7.16 | PASS | PASS | Pet klikova u 1,474 s. Promatrač promjena prikazane brojke zabilježio je samo 182,2 → 200,1 km. [Vremena i promjene](../../qa/out/p2/7.16.txt). [7.16](../../qa/out/screens/p2-7.16.jpg) |
-| 8.1 | PASS | FAIL | Otvoreno svih 13 osnovnih i naprednih ⓘ, uključujući tumačenje 182,2/200,1 km. Dodatna provjera §6: u obrascu za uređivanje kamiona uz „Brzina (km/h)” nema ⓘ. [8.1](../../qa/out/screens/p2-8.1.jpg) [8.1-brzina](../../qa/out/screens/p2-8.1-brzina.jpg) |
+| 8.1 | PASS | PASS | Ciljana provjera na javnom demou 23. 11. 2026. Otvoreno svih 13 osnovnih i naprednih uputa te dodatna uputa za prikvačene naloge. Uputa uz limit navodi 182,2 i 200,1 km. U obrascu „Uredi A” uz „Brzina (km/h)” otvorena je uputa o prosječnih 60 km/h za oba kamiona i utjecaju brzine na trajanje vožnje. NP-08 ispravljen u `3408d82` nakon drugog prolaza (FAIL). [Tumačenje limita](../../qa/out/screens/np08-8.1-limit.jpg) · [Brzina kamiona](../../qa/out/screens/np08-8.1-brzina.jpg) · [Svi očitani tekstovi](../../qa/out/screens/np08-7.4-8.1.json) |
 | 8.2 | PASS | PASS | Bez automatskog modala na šest kartica. Prvi koraci dopuštaju rad. Zapis 8.2-4.txt. |
 | 8.3 | PASS | PASS | Prigušeni podnaslovi na šest kartica i dosljedna ikona ⓘ uz postavke, uključujući napredne. [8.1](../../qa/out/screens/p2-8.1.jpg) [7.9](../../qa/out/screens/p2-7.9.jpg) |
 | 8.4 | PASS | PASS | Svih šest kartica ima opis neposredno ispod naslova. Tekstovi u 8.2-4.txt. |
