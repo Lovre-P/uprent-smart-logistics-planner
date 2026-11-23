@@ -113,7 +113,10 @@ def _why(s: Scenario, ctx: ExactContext, current: Assignment, lazy: bool, analys
                 comparable.discard(truck.id)
                 continue
             if order.id not in other.by_truck[truck.id]:
-                row.impossible = f"Uz prikvačivanje na {truck.id} odabrani plan izostavlja {order.id}."
+                if s.settings.allow_partial:
+                    row.impossible = f"Uz prikvačivanje na {truck.id} odabrani plan izostavlja {order.id}."
+                else:
+                    row.impossible = f"S nalogom {order.id} na {truck.id} potpuni plan nije moguć."
                 comparable.discard(truck.id)
                 continue
             row.other_truck_orders = sorted(other.by_truck[truck.id])

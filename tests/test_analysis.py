@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from uprent.analysis import analyze
@@ -141,6 +143,23 @@ def test_why_keeps_other_existing_pins(scenario):
     s = apply_overrides(scenario, {"pinned_orders": {"N03": "A"}})
     row = next(r for r in solve(s).analysis.why if r.order == "N04" and r.other_truck == "A")
     assert {"N03", "N04"}.issubset(row.other_truck_orders)
+
+
+def test_why_no_full_plan_with_pinned_order_seed_7154():
+    fixture = Path(__file__).parent / "fixtures" / "review_7154.json"
+    scenario = Scenario.model_validate_json(fixture.read_text(encoding="utf-8"))
+    result = solve(scenario)
+    assert result.totals.served == 8
+
+    pinned = apply_overrides(scenario, {"pinned_orders": {"N08": "A"}})
+    assert solve(pinned).status == "NO_FULL_PLAN"
+    partial = solve(apply_overrides(pinned, {"allow_partial": True}))
+    assert partial.totals.served == 7
+    assert "N08" in next(truck.orders for truck in partial.trucks if truck.id == "A")
+
+    row = next(r for r in result.analysis.why if r.order == "N08" and r.other_truck == "A")
+    assert row.impossible == "S nalogom N08 na A potpuni plan nije moguć."
+    assert row.other_km is None and not row.lazy
 
 
 def test_analysis_guard_keeps_plan_and_discards_incomplete_frontier(scenario, monkeypatch):
