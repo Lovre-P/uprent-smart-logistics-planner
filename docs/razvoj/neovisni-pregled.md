@@ -114,3 +114,29 @@ Neobavezno, ako ostane vremena: NP-11, NP-12, NP-08, NP-09 i NP-10. NP-07 je za 
 ## Ponovljivost
 
 Usporedba s referentnim solverom pokreće se naredbom `uv run python qa/oracle/compare_with_app.py --seeds 100 --start 5000`. Skripta za 300 rubnih scenarija pokrenuta je izvan repozitorija. Na tablicama `qa/oracle/oracle_exact.py` nabraja sve raspodjele i uspoređuje ih s izlazom funkcije `uprent.service.solve`. Na zahtjev se može dodati u `qa/oracle/`.
+
+## Ispravci nakon pregleda
+
+23. studenoga 2026. · Codex · svih šest zatraženih nalaza je ispravljeno. Izvorni pregled pohranjen je zasebno u commitu `c49dddc`. Za svaki je nalaz provjera prije izmjene pokazala opisani problem, a nakon izmjene prošla.
+
+| Nalaz | Commit | Što je potvrđeno |
+|---|---|---|
+| NP-02 | `89dfb7c` | Uz strogi limit i trajanje utovara i istovara od po 21 min plan prikazuje **217,0 km**. Tablica koraka prikazuje **17,0 km**, a tekst analize također zadržava decimalu. |
+| NP-03 | `f854443` | Iznad Plana i Analize vidi se koji su nalozi prikvačeni. Egzaktni raspored ima oznaku „Optimalno uz prikvačene naloge”. OR-Tools zadržava „Najbolje pronađeno”. Gumb „Vrati optimalni plan” uklanja prikvačivanja. |
+| NP-04 | `f909004` | README, upute i sažetak implementacije navode isti prag automatskog izbora egzaktnog solvera, do 12 naloga i 3 kamiona. |
+| NP-05 | `64d88cf` | U dokumentu o AI alatima provjereni su opis Claudeova rada, poveznica na ovaj pregled, zaključak o Geminijevoj primjedbi i odlomak o dodatnih 100 i 300 scenarija. |
+| NP-11 | `79a65e2` | Na vrhu QA izvještaja piše da se snimke i izlazi čuvaju lokalno u `qa/out/`. |
+| NP-12 | `ce461d6` | Ulaz za sjeme 7154 spremljen je u `tests/fixtures/review_7154.json`. Početni plan izvršava 8/8 naloga. Uz N08 na A potpuni je plan neizvediv, a dopušteni djelomični izvršava 7/8, uključujući N08. Redak „Zašto” sada glasi „S nalogom N08 na A potpuni plan nije moguć.” |
+
+**Izgradnja i testovi.** `npm run build` je prošao. Lokalno su prošla 224 testa za Python, 68 za sučelje i 8 Playwright testova. Prvi istodobni pokušaj iscrpio je memoriju. Paketi su zatim pokrenuti redom, uz `--maxWorkers=2` za Vitest. Na GitHubu su za commit `ce461d6` prošla oba posla, `python` i `web`. [CI za ispravke](https://github.com/Lovre-P/uprent-smart-logistics-planner/actions/runs/45132669747).
+
+**Javni demo.** Nakon CI-ja objavljena je verzija `ff7aac49-31fd-4962-a99d-3e31a3a86b5c` uz `max_instances: 1`. Pri prvom otvaranju preglednik je još učitao prethodnu izgradnju. Nakon osvježavanja učitao je `index-CU6mLAyk.js`, koji odgovara završnoj izgradnji. Sljedeće su provjere izvedene klikovima u ugrađenom pregledniku na toj verziji. [Otvori javni demo](https://uprent-smart-logistics-planner.lovre-petrina2.workers.dev/).
+
+| Radnja | Ishod | Lokalni dokaz u `qa/out/screens/` |
+|---|---|---|
+| Otvoriti početni plan i pregledati korake kamiona B | PASS · **182,2 km**. Svih 21 dionica ima jednu decimalu, uključujući **17,0 km**, **18,0 km** i **0,0 km**. | `np-01-pocetni.jpg`, `np-02-dionice.jpg` |
+| Kliknuti „Primijeni” za uključivanje utovara i istovara u limit | PASS · **200,1 km**. | `np-03-primijeni.jpg` |
+| Vratiti početne postavke, otvoriti Analizu i kliknuti točku 284,2 km / 344,8 min | PASS · Plan prikazuje **284,2 km** i status „Optimalno uz prikvačene naloge”. Traka u Planu i Analizi navodi svih deset dodjela, uključujući N03 → A, i gumb za povratak. | `np-04-prikvaceni-plan.jpg`, `np-05-prikvacena-analiza.jpg` |
+| U Analizi kliknuti „Vrati optimalni plan” | PASS · Plan ponovno prikazuje **182,2 km** i „Dokazano optimalno”. Traka je nestala. | `np-06-povratak.jpg` |
+
+Svi zabilježeni odgovori API-ja tijekom javne provjere imali su status HTTP 200. Konzola nije zabilježila upozorenja ni pogreške. Očitane dionice, tekst trake, završni status i mrežni odzivi spremljeni su u `qa/out/screens/np-javna-provjera.json`.
