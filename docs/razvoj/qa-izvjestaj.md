@@ -1,5 +1,7 @@
 # QA izvještaj
 
+Snimke zaslona i izlazi provjera nalaze se u lokalnoj mapi `qa/out/`, koja nije u repozitoriju.
+
 22.–23. studenoga 2026. (Europe/Zagreb) · Codex · Windows, uv 0.11.25, Python 3.11.9, Node v24.13.1. Prvi prolaz `2955b9d`. Provjerena završna revizija `a68165c`.
 
 ## Sažetak
